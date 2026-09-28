@@ -1,0 +1,1044 @@
+<title>AJWA Anahtar Yolu</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F5F4F0; --surface:#FFFFFF; --surface2:#ECEAE3;
+  --ink:#1E2438; --ink2:#4A5068; --muted:#7A7F93; --line:#D9D7CE;
+  --lapis:#3A5BA8; --brass:#A8781F; --pomeg:#A63845;
+  --lapis-soft:#E3E9F6; --brass-soft:#F3EAD6; --pomeg-soft:#F4E1E3;
+  --shadow:0 1px 2px rgba(30,36,56,.06),0 8px 24px -12px rgba(30,36,56,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#15171E; --surface:#1E2129; --surface2:#262A34;
+    --ink:#ECEBE6; --ink2:#B9BBC6; --muted:#858896; --line:#343844;
+    --lapis:#6A88D0; --brass:#B88A2E; --pomeg:#D05A88;
+    --lapis-soft:#26304A; --brass-soft:#3A3120; --pomeg-soft:#3F2634;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#15171E; --surface:#1E2129; --surface2:#262A34;
+  --ink:#ECEBE6; --ink2:#B9BBC6; --muted:#858896; --line:#343844;
+  --lapis:#6A88D0; --brass:#B88A2E; --pomeg:#D05A88;
+  --lapis-soft:#26304A; --brass-soft:#3A3120; --pomeg-soft:#3F2634;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding-block:24px 64px;padding-inline:20px}
+h1,h2,h3{font-family:Marcellus,Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.6vw,40px);line-height:1.12}
+h2{font-size:clamp(22px,3vw,28px);margin-bottom:6px}
+h3{font-size:18px}
+p{margin:0}
+.eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.lede{color:var(--ink2);font-size:17px;max-width:62ch;margin-top:14px}
+section{margin-top:44px}
+.sec-head{display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
+.sec-head p{color:var(--ink2);max-width:66ch}
+
+/* top bar + tabs */
+.topbar{display:flex;flex-direction:column;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.brand{font-family:Marcellus,Georgia,serif;font-size:20px;letter-spacing:.04em}
+.brand small{display:block;font-family:Manrope,system-ui,sans-serif;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:2px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:var(--surface2);padding:4px;border-radius:8px}
+.tab-btn{appearance:none;border:0;background:transparent;color:var(--ink2);font:inherit;font-weight:600;font-size:13.5px;padding:9px 12px;border-radius:6px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1.2;text-align:left}
+.tab-btn small{font-weight:500;font-size:11px;color:var(--muted)}
+.tab-btn .grp{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.tab-btn[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.tab-btn[aria-selected="true"] small{color:var(--lapis)}
+.tab-btn:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}
+@media (max-width:700px){.tabs{grid-template-columns:1fr 1fr}}
+
+.hero{padding-top:28px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.hero .eyebrow{display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:14px}
+.hero .eyebrow span+span::before{content:"·";margin-right:14px;color:var(--line)}
+
+/* KPI strip */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:24px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:2px}
+.kpi b{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi small{color:var(--muted);font-size:12px;line-height:1.3}
+.kpi.now{background:var(--lapis-soft);border-color:transparent}
+.kpi.now b{color:var(--lapis)}
+.kpi.gap{background:var(--pomeg-soft);border-color:transparent}
+.kpi.gap b{color:var(--pomeg)}
+.kpi.goal{background:var(--brass-soft);border-color:transparent}
+.kpi.goal b{color:var(--brass)}
+@media (max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}.kpi:first-child{grid-column:1/-1}}
+
+/* figures */
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 18px 12px;box-shadow:var(--shadow)}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+figcaption{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.45}
+.svgtxt{font-family:Manrope,"Segoe UI",system-ui,sans-serif}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px;color:var(--ink2);margin-top:10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+
+/* two-col */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px}
+.panel h3{margin-bottom:10px}
+.panel ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--ink2)}
+.panel li b{color:var(--ink);font-weight:600}
+
+/* compare table */
+.tblwrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:13.5px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--surface2)}
+tr:last-child td{border-bottom:0}
+td:first-child{color:var(--muted);font-weight:600;white-space:nowrap}
+td.hl{background:var(--lapis-soft)}
+th.hl{color:var(--lapis)}
+
+/* criteria strip */
+.crit{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+@media (max-width:700px){.crit{grid-template-columns:repeat(2,1fr)}.crit .c:last-child{grid-column:1/-1}}
+.crit .c{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px}
+.crit .c b{display:block;font-size:13.5px;margin-bottom:3px}
+.crit .c span{font-size:12px;color:var(--muted);line-height:1.4}
+
+/* action cards */
+.actions{display:flex;flex-direction:column;gap:10px}
+.act{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.act .rank{font-family:Marcellus,Georgia,serif;font-size:26px;line-height:1;color:var(--lapis);padding-top:2px;font-variant-numeric:tabular-nums}
+.act h3{font-size:16.5px;font-family:Manrope,system-ui,sans-serif;font-weight:700;margin-bottom:3px}
+.act p{color:var(--ink2);font-size:14px}
+.act .why{font-size:12.5px;color:var(--muted);margin-top:6px}
+.score{display:flex;flex-direction:column;align-items:flex-end;gap:3px;min-width:86px}
+.score small{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.score b{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:20px;font-variant-numeric:tabular-nums}
+.pips{display:flex;gap:3px}
+.pips i{width:12px;height:5px;border-radius:2px;background:var(--surface2)}
+.pips i.on{background:var(--lapis)}
+@media (max-width:560px){.act{grid-template-columns:36px 1fr}.score{grid-column:2;flex-direction:row;align-items:center;gap:10px;margin-top:6px}}
+
+/* phase grid */
+.phases{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:700px){.phases{grid-template-columns:1fr}}
+.phase{border-radius:8px;padding:18px;border:1px solid var(--line);background:var(--surface)}
+.phase .tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:3px;margin-bottom:10px}
+.phase.mid .tag{background:var(--brass-soft);color:var(--brass)}
+.phase.long .tag{background:var(--pomeg-soft);color:var(--pomeg)}
+.phase ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;color:var(--ink2)}
+.phase li b{color:var(--ink);font-weight:600}
+.phase .note{margin-top:14px;font-size:13px;color:var(--muted)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.steps.three{grid-template-columns:repeat(3,1fr)}
+@media (max-width:700px){.steps,.steps.three{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.steps,.steps.three{grid-template-columns:1fr}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 14px 12px}
+.step .n{font-family:Marcellus,Georgia,serif;font-size:13px;letter-spacing:.1em;color:var(--brass);margin-bottom:6px}
+.step h3{font-size:15px;font-family:Manrope,system-ui,sans-serif;font-weight:700;margin-bottom:4px}
+.step p{font-size:13px;color:var(--ink2)}
+
+/* north star + caveats */
+.north{background:var(--ink);color:var(--bg);border-radius:8px;padding:26px 28px;display:grid;grid-template-columns:1fr;gap:10px}
+.north .eyebrow{color:var(--brass)}
+.north p{font-family:Marcellus,Georgia,serif;font-size:clamp(19px,2.6vw,24px);line-height:1.35;text-wrap:balance}
+.north .sub{font-family:Manrope,system-ui,sans-serif;font-size:13.5px;opacity:.75}
+:root[data-theme="dark"] .north{background:var(--surface2);color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .north{background:var(--surface2);color:var(--ink)}}
+.caveats{margin-top:14px;background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:16px 18px}
+.caveats h3{font-size:14px;font-family:Manrope,system-ui,sans-serif;font-weight:700;margin-bottom:8px}
+.caveats ul{margin:0;padding-left:18px;color:var(--ink2);font-size:13.5px;display:flex;flex-direction:column;gap:5px}
+
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+footer ul{margin:8px 0 0;padding-left:18px;columns:2;column-gap:28px}
+@media (max-width:600px){footer ul{columns:1}}
+footer a{color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a:hover{border-color:var(--ink2)}
+a:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){.act,.kpi,.step{transition:transform .18s ease}.act:hover{transform:translateY(-1px)}}
+</style>
+
+<div class="wrap">
+
+<div class="topbar">
+  <div class="brand">AJWA Anahtar Yolu<small>Özet rapor · 26 Eylül 2026 · Claude × GPT Astra</small></div>
+  <div class="tabs" role="tablist" aria-label="Rapor seçimi">
+    <button class="tab-btn" role="tab" id="btn-sultanahmet" aria-selected="true" aria-controls="tab-sultanahmet" data-tab="sultanahmet"><span class="grp">Otel</span>AJWA Sultanahmet<small>1 → 2 Anahtar</small></button>
+    <button class="tab-btn" role="tab" id="btn-cappadocia" aria-selected="false" aria-controls="tab-cappadocia" data-tab="cappadocia"><span class="grp">Otel</span>AJWA Cappadocia<small>0 → 1 Anahtar</small></button>
+    <button class="tab-btn" role="tab" id="btn-zeferan-sultanahmet" aria-selected="false" aria-controls="tab-zeferan-sultanahmet" data-tab="zeferan-sultanahmet"><span class="grp">Restoran</span>Zeferan Sultanahmet<small>→ Michelin Selected</small></button>
+    <button class="tab-btn" role="tab" id="btn-zeferan-cappadocia" aria-selected="false" aria-controls="tab-zeferan-cappadocia" data-tab="zeferan-cappadocia"><span class="grp">Restoran</span>Zeferan Cappadocia<small>→ Michelin Selected</small></button>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SEKME 1 · AJWA SULTANAHMET                                      -->
+<!-- ============================================================ -->
+<div id="tab-sultanahmet" role="tabpanel" aria-labelledby="btn-sultanahmet">
+
+<header class="hero">
+  <div class="eyebrow"><span>İstanbul · Sultanahmet</span><span>61 oda · 2017</span><span>Preferred LVX Collection</span></div>
+  <h1>Bir Anahtar'dan İki Anahtar'a, ve ötesi</h1>
+  <p class="lede">Michelin 2026 seçkisinde Bir Anahtar aldık. Yatırımcının hedefi İki Anahtar. Bu sekme, bir üst çıtayı (LHW ve Forbes) tanımlar, otelin bugünkü konumunu ölçer ve önce küçük aksiyonla büyük fark yaratacak işleri, sonra orta ve uzun vadeli adımları sıralar.</p>
+  <div class="kpis">
+    <div class="kpi now"><b>1 Anahtar</b><small>Michelin 2026 · Türkiye'de 22 otelle aynı seviye</small></div>
+    <div class="kpi"><b>4,9</b><small>TripAdvisor · İstanbul'da 2.641 otel içinde #23</small></div>
+    <div class="kpi"><b>9,2</b><small>Booking.com · 2.089 yorum</small></div>
+    <div class="kpi"><b>4,7</b><small>Google · 1.128 yorum</small></div>
+    <div class="kpi"><b>61 oda</b><small>48 Deluxe · 12 süit · 1 Sultan Süiti</small></div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">1 · Üst çıta ne olabilir?</span>
+    <h2>Standart merdiveni</h2>
+    <p>Michelin Anahtarı "karakter ve deneyim"i ölçer. LHW ve Forbes ise <b>hizmetin her vardiyada tutarlılığını</b> yüzlerce maddelik gizli denetimle ölçer. Bu yüzden İki Anahtar'ın üstündeki gerçek çıta, bir üyelik değil, denetim disiplinidir.</p>
+  </div>
+  <figure>
+    <svg viewBox="0 0 860 330" role="img" aria-label="Beş basamaklı standart merdiveni: Bir Anahtar, İki Anahtar, Üç Anahtar, LHW, Forbes Beş Yıldız">
+      <g class="svgtxt" font-size="12.5">
+        <line x1="20" y1="262" x2="840" y2="262" stroke="var(--line)" stroke-width="1"/>
+        <rect x="30" y="200" width="150" height="62" rx="4" fill="var(--lapis)"/>
+        <rect x="196" y="168" width="150" height="94" rx="4" fill="var(--brass)"/>
+        <rect x="362" y="136" width="150" height="126" rx="4" fill="var(--surface2)" stroke="var(--line)"/>
+        <rect x="528" y="104" width="150" height="158" rx="4" fill="var(--surface2)" stroke="var(--line)"/>
+        <rect x="694" y="72" width="146" height="190" rx="4" fill="var(--surface2)" stroke="var(--line)"/>
+        <text x="105" y="236" text-anchor="middle" fill="#fff" font-weight="700" font-size="14">1 Anahtar</text>
+        <text x="271" y="220" text-anchor="middle" fill="#fff" font-weight="700" font-size="14">2 Anahtar</text>
+        <text x="437" y="205" text-anchor="middle" fill="var(--ink)" font-weight="700" font-size="14">3 Anahtar</text>
+        <text x="603" y="188" text-anchor="middle" fill="var(--ink)" font-weight="700" font-size="14">LHW</text>
+        <text x="767" y="172" text-anchor="middle" fill="var(--ink)" font-weight="700" font-size="14">Forbes 5★</text>
+        <text x="437" y="226" text-anchor="middle" fill="var(--ink2)" font-size="11.5">"Sıra dışı konaklama"</text>
+        <text x="603" y="209" text-anchor="middle" fill="var(--ink2)" font-size="11.5">LQA denetimi · 800+ madde</text>
+        <text x="603" y="226" text-anchor="middle" fill="var(--ink2)" font-size="11.5">yıllık min. %85 · üye referansı</text>
+        <text x="767" y="193" text-anchor="middle" fill="var(--ink2)" font-size="11.5">~900 madde · 2 gece gizli</text>
+        <text x="767" y="210" text-anchor="middle" fill="var(--ink2)" font-size="11.5">%75 hizmet · %25 tesis</text>
+        <text x="767" y="227" text-anchor="middle" fill="var(--ink2)" font-size="11.5">5★ için ≥ %90</text>
+        <text x="105" y="188" text-anchor="middle" fill="var(--ink)" font-weight="700">Buradayız</text>
+        <text x="105" y="172" text-anchor="middle" fill="var(--muted)" font-size="11.5">AJWA Sultanahmet</text>
+        <text x="271" y="156" text-anchor="middle" fill="var(--ink)" font-weight="700">Hedef</text>
+        <text x="271" y="140" text-anchor="middle" fill="var(--muted)" font-size="11.5">İstanbul'da tek örnek: The Peninsula</text>
+        <text x="437" y="124" text-anchor="middle" fill="var(--muted)" font-size="11.5">Four Seasons Sultanahmet</text>
+        <text x="603" y="92" text-anchor="middle" fill="var(--muted)" font-size="11.5">Türkiye'den: Çırağan Palace Kempinski</text>
+        <text x="767" y="60" text-anchor="middle" fill="var(--muted)" font-size="11.5">İstanbul'da yalnızca iki Four Seasons</text>
+        <text x="105" y="286" text-anchor="middle" fill="var(--muted)" font-size="11.5">Karakter + deneyim</text>
+        <text x="271" y="286" text-anchor="middle" fill="var(--muted)" font-size="11.5">+ her vardiyada tutarlılık</text>
+        <text x="437" y="286" text-anchor="middle" fill="var(--muted)" font-size="11.5">+ otel = seyahat nedeni</text>
+        <text x="603" y="286" text-anchor="middle" fill="var(--muted)" font-size="11.5">Üyelik + gizli denetim</text>
+        <text x="767" y="286" text-anchor="middle" fill="var(--muted)" font-size="11.5">Saf hizmet denetimi</text>
+        <line x1="30" y1="310" x2="512" y2="310" stroke="var(--line)"/>
+        <text x="271" y="325" text-anchor="middle" fill="var(--muted)" font-size="11" letter-spacing="1.5">MICHELIN: KİMLİK VE DENEYİM</text>
+        <line x1="528" y1="310" x2="840" y2="310" stroke="var(--line)"/>
+        <text x="684" y="325" text-anchor="middle" fill="var(--muted)" font-size="11" letter-spacing="1.5">DENETİM: TUTARLILIK</text>
+      </g>
+    </svg>
+    <figcaption><b>Öneri (Astra ile ortak):</b> Yatırımcı hedefi İki Anahtar kalsın; operasyonel iç standart olarak <b>Forbes/LQA çerçevesi</b> benimsensin. LHW ise ayrı bir ticari karar: dağıtım getirisi, Preferred LVX ile münhasırlık ve aidat yükü ölçülmeden girilmemeli.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">2 · Bugün neredeyiz?</span>
+    <h2>Güçlü yanlar ve açıklar</h2>
+    <p>Kaynak: ajwa.com.tr taraması, Michelin otel sayfası, TripAdvisor/Google/Booking yorum örüntüleri ve Astra'nın sektör bilgisi.</p>
+  </div>
+  <div class="cols">
+    <div class="panel">
+      <h3>Misafirin övdüğü</h3>
+      <ul>
+        <li><b>Zanaat ve dekor:</b> sedef kakma, Tebriz ipek halı, el boyaması tavan. Michelin'in de öne çıkardığı şey.</li>
+        <li><b>Zeferan kahvaltısı ve manzara:</b> yorumlarda en sık geçen tek deneyim.</li>
+        <li><b>Personel sıcaklığı:</b> Hasan, Mari, Mustafa gibi isimler yorumlarda tekrar ediyor. Bu, İki Anahtar'ın hammaddesi.</li>
+        <li><b>Temizlik, ses yalıtımı, hamam.</b></li>
+        <li><b>Konum:</b> Sultanahmet'e 10 dk, sakin sokak.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Tekrar eden açıklar</h3>
+      <ul>
+        <li><b>Beklenti sürprizi:</b> alkolsüz konsept, cinsiyete göre ayrılmış spa/havuz saatleri ve yokuş, satın alma öncesinde yeterince anlatılmıyor.</li>
+        <li><b>Web sitesi boş sayfalar:</b> Butler, Spa, Zeferan ve "About" sayfaları "more detail" ile geçiştiriliyor. Zanaat hikâyesi, şef, imza yemek, saatler yok. Yalnızca EN/TR.</li>
+        <li><b>Oda aydınlatması:</b> yorumlarda sistemli tek fiziksel şikâyet.</li>
+        <li><b>Fiyat/değer algısı:</b> TripAdvisor'da en düşük alt puan (4,7). Yorumlar "pahalı" diyor, kimse "ne için?" sorusuna cevap bulamıyor.</li>
+        <li><b>Yorum yanıtı yok:</b> incelenen son TripAdvisor yorumlarında yönetim yanıtı görülmedi. Cappadocia ekibi her yoruma yanıt veriyor. Sürdürülebilirlik sayfası da yok.</li>
+      </ul>
+    </div>
+  </div>
+  <figure style="margin-top:12px">
+    <svg viewBox="0 0 860 205" role="img" aria-label="TripAdvisor alt puanları 4.0 ile 5.0 arasında nokta grafiği">
+      <g class="svgtxt" font-size="12.5">
+        <line x1="180" y1="170" x2="820" y2="170" stroke="var(--line)"/>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="middle">
+          <text x="180" y="188">4,0</text><text x="308" y="188">4,2</text><text x="436" y="188">4,4</text><text x="564" y="188">4,6</text><text x="692" y="188">4,8</text><text x="820" y="188">5,0</text>
+        </g>
+        <g stroke="var(--line)" stroke-dasharray="2 4"><line x1="308" y1="20" x2="308" y2="170"/><line x1="436" y1="20" x2="436" y2="170"/><line x1="564" y1="20" x2="564" y2="170"/><line x1="692" y1="20" x2="692" y2="170"/></g>
+        <g fill="var(--ink2)" text-anchor="end">
+          <text x="160" y="35">Konum</text><text x="160" y="59">Temizlik</text><text x="160" y="83">Hizmet</text><text x="160" y="107">Odalar</text><text x="160" y="131">Uyku kalitesi</text><text x="160" y="155" font-weight="700" fill="var(--ink)">Fiyat / değer</text>
+        </g>
+        <g stroke="var(--line)"><line x1="180" y1="31" x2="756" y2="31"/><line x1="180" y1="55" x2="756" y2="55"/><line x1="180" y1="79" x2="756" y2="79"/><line x1="180" y1="103" x2="692" y2="103"/><line x1="180" y1="127" x2="692" y2="127"/><line x1="180" y1="151" x2="628" y2="151"/></g>
+        <g fill="var(--lapis)" stroke="var(--surface)" stroke-width="2"><circle cx="756" cy="31" r="7"/><circle cx="756" cy="55" r="7"/><circle cx="756" cy="79" r="7"/><circle cx="692" cy="103" r="7"/><circle cx="692" cy="127" r="7"/></g>
+        <circle cx="628" cy="151" r="7" fill="var(--pomeg)" stroke="var(--surface)" stroke-width="2"/>
+        <g fill="var(--ink)" font-size="12" font-weight="600"><text x="770" y="35">4,9</text><text x="770" y="59">4,9</text><text x="770" y="83">4,9</text><text x="706" y="107">4,8</text><text x="706" y="131">4,8</text><text x="642" y="155">4,7</text></g>
+      </g>
+    </svg>
+    <figcaption>TripAdvisor alt puanları, 1.008 yorum. Tüm puanlar yüksek; tek göreli zayıf nokta <b>fiyat/değer</b>. Michelin'in beş kriterinden biri de tam olarak bu: "ödenen bedelin karşılığı".</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">3 · Neyi önce yapalım?</span>
+    <h2>Etki × kolaylık matrisi</h2>
+    <p>Sağ üst köşe "önce buradan başla" bölgesi. Renk, uygulama dönemini gösterir. Puanlar Astra ile ortak yönetim tahminidir.</p>
+  </div>
+  <figure>
+    <svg viewBox="0 0 860 460" role="img" aria-label="Etki ve kolaylık matrisi, 12 aksiyon">
+      <g class="svgtxt" font-size="12.5">
+        <rect x="455" y="40" width="365" height="180" fill="var(--lapis-soft)" opacity=".55" rx="4"/>
+        <text x="810" y="60" text-anchor="end" fill="var(--lapis)" font-size="11" font-weight="700" letter-spacing="1.5">ÖNCE BURADAN BAŞLA</text>
+        <g stroke="var(--line)" stroke-dasharray="2 4"><line x1="90" y1="130" x2="820" y2="130"/><line x1="90" y1="220" x2="820" y2="220"/><line x1="90" y1="310" x2="820" y2="310"/><line x1="272" y1="40" x2="272" y2="400"/><line x1="455" y1="40" x2="455" y2="400"/><line x1="637" y1="40" x2="637" y2="400"/></g>
+        <line x1="90" y1="400" x2="820" y2="400" stroke="var(--line)"/><line x1="90" y1="40" x2="90" y2="400" stroke="var(--line)"/>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="middle"><text x="90" y="420">zor</text><text x="455" y="420">kolaylık</text><text x="820" y="420">kolay</text></g>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="end"><text x="80" y="404">düşük</text><text x="80" y="222">etki</text><text x="80" y="46">yüksek</text></g>
+        <g fill="var(--lapis)" stroke="var(--surface)" stroke-width="2"><circle cx="820" cy="40" r="8"/><circle cx="820" cy="130" r="8"/><circle cx="637" cy="40" r="8"/><circle cx="620" cy="130" r="8"/><circle cx="655" cy="152" r="8"/><circle cx="655" cy="108" r="8"/><circle cx="820" cy="220" r="8"/><circle cx="455" cy="130" r="8"/></g>
+        <g fill="var(--brass)" stroke="var(--surface)" stroke-width="2"><circle cx="272" cy="40" r="8"/><circle cx="272" cy="130" r="8"/><circle cx="300" cy="160" r="8"/></g>
+        <g fill="var(--pomeg)" stroke="var(--surface)" stroke-width="2"><circle cx="90" cy="130" r="8"/></g>
+        <g fill="var(--ink)" font-size="12" font-weight="600">
+          <text x="808" y="30" text-anchor="end">Satın alma öncesi beklenti</text>
+          <text x="808" y="120" text-anchor="end">Web boş sayfalar + zanaat hikâyesi</text>
+          <text x="625" y="30" text-anchor="end">Tercih kaydı + tek sorumlu</text>
+          <text x="608" y="134" text-anchor="end">Oda "misafir gibi" kontrol</text>
+          <text x="667" y="176">Zeferan imza hikâyeleri</text>
+          <text x="667" y="98">Ön büroya çözüm yetkisi</text>
+          <text x="808" y="210" text-anchor="end">TripAdvisor yönetim yanıtı</text>
+          <text x="443" y="120" text-anchor="end">Zanaatkâr rotası pilotu</text>
+          <text x="284" y="30">Bağımsız gizli denetim</text>
+          <text x="260" y="120" text-anchor="end">Spa aile / özel slot</text>
+          <text x="312" y="185">LHW ticari model + Çırağan teması</text>
+          <text x="102" y="120">Aydınlatma / uyku CAPEX</text>
+        </g>
+      </g>
+    </svg>
+    <div class="legend"><span><i style="background:var(--lapis)"></i>0–3 ay</span><span><i style="background:var(--brass)"></i>3–12 ay</span><span><i style="background:var(--pomeg)"></i>12+ ay</span></div>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">4 · 0–3 ay</span>
+    <h2>Ufak aksiyon, büyük fark</h2>
+    <p>Neredeyse sıfır CAPEX. Hepsi Michelin'in "hizmet tutarlılığı" ve "fiyat karşılığı" kriterlerine ve Forbes'un %75'lik hizmet ağırlığına doğrudan dokunur.</p>
+  </div>
+  <div class="actions">
+    <div class="act"><div class="rank">1</div><div><h3>Beklenti sürprizlerini satın alma öncesinde kaldır</h3><p>Web, rezervasyon motoru ve OTA açıklamalarında aynı üç cümle: alkol servisi yoktur, spa/havuz saatleri şöyledir, otel yokuştadır ve araçla karşılama yapılır. Varıştan 48–72 saat önce kısa bir mesajla tekrar.</p><p class="why">Neden: yorumlardaki tek sistemli şikâyet kümesi. Sorunu değil, sürprizi kaldırır.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 5</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">2</div><div><h3>Web sitesindeki boş sayfaları gerçek içerikle doldur</h3><p>Önce hizmet kapsamı, saatler, erişim: Butler neyi kapsar, Afiya'da ne var, Zeferan'ın şefi ve üç imza yemeği kim/ne. Sonra doğrulanmış zanaat hikâyesi: sedef ustası, halının dokunduğu yer, tavan ressamı.</p><p class="why">Neden: Michelin müfettişi ve LHW geliştirme ekibi oteli önce siteden okur. Bugün "more detail" linkleri boş.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 5</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">3</div><div><h3>Tercih kaydı ve "tek sorumlu" takip</h3><p>Misafirin yastık, kahve, oda sıcaklığı tercihini izinle kaydet; her talebin bir sahibi, bir teslim süresi ve bir kapanış teyidi olsun. Vardiya devrinde açık işler listeyle geçsin. Misafir aynı şeyi iki kez anlatmasın.</p><p class="why">Neden: 61 oda, misafiri tanıma avantajıdır. Peninsula'nın havuzuyla değil, hafızasıyla yarışırız.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">4</div><div><h3>Odayı misafir gibi kontrol et, ön büroya çözüm yetkisi ver</h3><p>Satışa açılmadan her odada 3 dakikalık kontrol: ışık senaryoları, kumandalar, prizler, duş basıncı, perde. Aydınlatma şikâyetini oda bazında kapat. Ön büroya tanımlı telafi seçenekleri ve yetki limiti; önce sorun giderilir, sonra jest.</p><p class="why">Neden: LQA'nın "ürün" ve "verimlilik" kriterleri, Forbes'un "anticipatory service" beklentisi.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">5</div><div><h3>Zeferan'da üç imza yemek, üç hikâye, alkolsüz eşleşme</h3><p>Her imza yemek için 30 saniyelik doğrulanmış anlatım ve bir üretici adı. Koruk, nar, demirhindi ve çay üzerinden yemekle eşleşen alkolsüz içecek menüsü. Kahvaltıda bir yerel ürünü masada tanıt. Servis ekibi tadıp öğrenir.</p><p class="why">Neden: alkolsüzlük, "eksik" değil "bilinçli gastronomi kimliği" olarak çerçevelenir. Michelin'in "karakter" kriteri. Ayrıntı: Zeferan Sultanahmet sekmesi.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">6</div><div><h3>TripAdvisor'da yönetim yanıtı ve şikâyet kapanışı</h3><p>İncelenen son yorumlarda yönetim yanıtı yok; Cappadocia ekibi her yoruma imzalı yanıt veriyor. Erişimi içeriden doğrula, bir yanıt sorumlusu belirle. Her yoruma değil: sorun içeren ve ismen teşekkür eden yorumlara kişiye özgü yanıt, şikâyette çözümün takibi.</p><p class="why">Neden: haftada bir saatlik iş. Michelin müfettişleri de, LHW de bu sayfaları okur.</p></div><div class="score"><small>etki × kolaylık</small><b>3 × 5</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">5 · Sonraki adımlar</span><h2>Orta vade ve yapısal yatırım</h2></div>
+  <div class="phases">
+    <div class="phase mid"><span class="tag">3–12 ay · sistem kurma</span>
+      <ol>
+        <li><b>Bağımsız gizli denetim.</b> LQA veya Forbes çerçevesiyle bir ön değerlendirme; bulguları sorumlu, tarih ve tekrar kontrolüyle kapat. İki Anahtar'a en çok yaklaştıran tek adım.</li>
+        <li><b>Zanaatkâr rotasını ürünleştir.</b> Pilot başarılıysa: üretim yapan usta, anlaşılmış ziyaret, doğrudan ustaya ödeme. Arasta'da gezmek zanaat deneyimi değildir. Michelin'in "destinasyona katkı" kriteri.</li>
+        <li><b>Spa için aile / özel kullanım slotu.</b> Reddedilen talepleri ölç; kapasite uygunsa rezervasyonlu özel saat. Cinsiyete göre ayrım "mahremiyet odaklı wellness" olarak anlatılır, ama aileye de bir cevap verilir.</li>
+        <li><b>Gece, hafta sonu ve yoğun kahvaltı vardiyalarını güçlendir.</b> Tutarlılık en iyi çalışanla değil, en zayıf saatte ölçülür.</li>
+        <li><b>LHW ticari modeli.</b> Mevcut Preferred LVX katkısını ölç; LHW aidat, komisyon ve münhasırlık hükümlerini yazılı incele; Çırağan Palace yönetimiyle tanışma ve yerinde ziyaret.</li>
+        <li><b>Sürdürülebilirlik: önce ölçüm, sonra sayfa.</b> Enerji, su, atık, adı verilebilen tedarikçiler. LQA'nın 8 kriterinden biri.</li>
+      </ol>
+    </div>
+    <div class="phase long"><span class="tag">12+ ay · kanıta dayalı CAPEX</span>
+      <ol>
+        <li><b>Uyku ve banyo önce.</b> Aydınlatma senaryolarının sezgiselleştirilmesi, karartma, sessiz iklimlendirme, duş basıncı. Yorumlardaki tek fiziksel şikâyet buradan kapanır.</li>
+        <li><b>Oda işlevselliği.</b> Prizler, bagaj alanı, depolama, erişilebilir oda sayısı.</li>
+        <li><b>Arka alan lojistiği.</b> Kat servis noktaları, linen akışı, yokuş için bagaj/araç karşılama düzeni. Hizmeti geciktiren her şey burada.</li>
+        <li><b>İmza süit veya spa genişlemesi.</b> Yalnızca kullanım, fiyat primi ve misafir geri bildirimi destekliyorsa.</li>
+      </ol>
+      <p class="note">Astra'nın notu: Bu kalemler yorum verisinde tekrar eden kusur olarak görünmeden önce yatırım gerekçesi taşımaz. Önce 0–3 ay listesi, sonra denetim, sonra CAPEX.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">6 · LHW'ye giden yol</span><h2>Dört adım</h2><p>LHW bir puan değil, üyelik. Başvurunun ön şartı mevcut bir üyenin referansı; kabul oranı yaklaşık %5. Türkiye'deki en somut aday: Çırağan Palace Kempinski.</p></div>
+  <div class="steps">
+    <div class="step"><div class="n">ADIM 1</div><h3>Uygunluk sorgusu</h3><p>LHW geliştirme ekibinden referans, koleksiyon münhasırlığı (Preferred LVX ile çakışma) ve F&B beklentilerini yazılı öğren.</p></div>
+    <div class="step"><div class="n">ADIM 2</div><h3>İç denetim</h3><p>LQA çerçevesiyle gizli ön değerlendirme. %85 eşiği bir kez değil, her yıl tutmak gerekir.</p></div>
+    <div class="step"><div class="n">ADIM 3</div><h3>Referans ilişkisi</h3><p>Çırağan yönetimine GM/yatırımcı düzeyinde tanışma ve yerinde ziyaret. Referans talebi ilişkiden sonra gelir.</p></div>
+    <div class="step"><div class="n">ADIM 4</div><h3>Ticari karar</h3><p>Tüm ücretler sonrası net oda geliri: Preferred'da kalmak mı, LHW'ye geçmek mi? Sayı konuşsun.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="north"><span class="eyebrow">Yatırımcıya tek cümle</span><p>"AJWA'yı, İstanbul'un yaşayan zanaatı ile Azerbaycan misafirperverliğini 61 odada kişisel, zahmetsiz ve her vardiyada tutarlı bir konaklamaya dönüştüren otel yapmak."</p><p class="sub">İlk 90 günün ölçüsü: tekrarlanan şikâyet, misafirin yeniden hatırlattığı talep, oda kusuru ve süresi aşılan iş sayısı düşsün.</p></div>
+  <div class="caveats"><h3>Doğrulama notları (Astra'nın uyarıları)</h3>
+    <ul>
+      <li>Mandarin Oriental Bosphorus için kaynaklar çelişiyor (Bir mi, Üç Anahtar mı). Yatırımcı sunumuna girmeden resmî Michelin listesiyle teyit edilmeli. Four Seasons Sultanahmet'in Üç Anahtar'ı ve Peninsula'nın İki Anahtar'ı tüm kaynaklarda tutarlı.</li>
+      <li>LHW %5 kabul / %85 eşik ve Forbes %90 / ~900 madde rakamları sektör kaynaklarından; sürüme göre değişebilir, güncel kurumsal belgeyle teyit edilmeli.</li>
+      <li>Web sayfasının boş olması hizmetin olmadığını göstermez; Les Clefs d'Or üyeliği kişiye aittir, Amex logosu tek başına program üyeliği kanıtı değildir.</li>
+      <li>Yorum puanları Michelin derecesine çevrilemez; ancak Michelin misafir skoru (19,5/20) ile yorum örüntüleri aynı yöne işaret ediyor.</li>
+    </ul>
+  </div>
+</section>
+
+<footer><b style="color:var(--ink2)">Kaynaklar · AJWA Sultanahmet</b>
+  <ul>
+    <li><a href="https://www.ajwa.com.tr/">ajwa.com.tr</a> (ana sayfa, oda/süit, Zeferan, Afiya, Butler, Concierge, About)</li>
+    <li><a href="https://guide.michelin.com/en/hotels-stays/istanbul/ajwa-sultanahmet-8731">Michelin Guide · AJWA Sultanahmet</a></li>
+    <li><a href="https://www.michelin.com/en/publications/products-and-services/michelin-guide-2026-michelin-key-selection">Michelin · 2026 Key seçkisi</a></li>
+    <li><a href="https://www.oggusto.com/seyahat/michelin-key-turkiye-otelleri">OGGUSTO · Michelin Key Türkiye 2026 listesi</a></li>
+    <li><a href="https://www.tripadvisor.com/Hotel_Review-g293974-d10619176-Reviews-AJWA_Sultanahmet-Istanbul.html">TripAdvisor · AJWA Sultanahmet</a></li>
+    <li><a href="https://www.booking.com/reviews/tr/hotel/ajwa-hotel-sultanahmet.html">Booking.com yorumları</a></li>
+    <li><a href="https://www.lhw.com/corporate/standards">LHW · Quality Standards</a></li>
+    <li><a href="https://goaudits.com/blog/lqa-hotel-standards/">LQA standartları özeti</a></li>
+    <li><a href="https://goaudits.com/blog/forbes-standards-unlocking-excellence-and-top-ratings/">Forbes Travel Guide standartları özeti</a></li>
+    <li><a href="https://www.luxurytraveladvisor.com/hotels/forbes-vs-michelin-vs-50-best-which-hotel-rankings-really-matter">Forbes vs Michelin vs LHW karşılaştırması</a></li>
+    <li><a href="https://press.fourseasons.com/istanbul/hotel-news/2026/forbes-five-star-hotels/">Forbes 2026 · İstanbul Beş Yıldız</a></li>
+    <li>GPT Astra (Codex) · çok turlu danışma, 26 Eylül 2026</li>
+  </ul>
+</footer>
+</div><!-- /tab-sultanahmet -->
+
+<!-- ============================================================ -->
+<!-- SEKME 2 · AJWA CAPPADOCIA                                       -->
+<!-- ============================================================ -->
+<div id="tab-cappadocia" role="tabpanel" aria-labelledby="btn-cappadocia" hidden>
+
+<header class="hero">
+  <div class="eyebrow"><span>Nevşehir · Mustafapaşa (Sinasos)</span><span>98 oda + 10 mağara süiti</span><span>Preferred Legend Collection</span></div>
+  <h1>Kapadokya'da ilk Anahtar'a giden yol</h1>
+  <p class="lede">Kapadokya, Türkiye'nin en kalabalık Michelin Anahtarı bölgesi: iki İki Anahtarlı, on altı Bir Anahtarlı otel. AJWA Cappadocia seçkide yok. Bu sekme, Uçhisar merkezli rakiplerle farkı ölçer ve 90 dönümlük araziyi, Sinasos mirasını ve Zeferan'ı "destinasyona katkı"ya çevirecek adımları sıralar.</p>
+  <div class="kpis">
+    <div class="kpi gap"><b>Seçkide yok</b><small>Michelin 2026 · Kapadokya'da 18 otel Anahtar aldı</small></div>
+    <div class="kpi"><b>4,9</b><small>TripAdvisor · 497 yorum · Mustafapaşa'da #5/32</small></div>
+    <div class="kpi"><b>5,0</b><small>Zeferan Cappadocia · TripAdvisor · 1.058 yorum</small></div>
+    <div class="kpi"><b>108</b><small>98 oda (3 bina) + 10 mağara süiti (130–165 m²)</small></div>
+    <div class="kpi"><b>90 dönüm</b><small>Kahve Müzesi · at çiftliği · seramik atölyesi · yurtlar</small></div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">1 · Kimlerle yarışıyoruz?</span><h2>Kapadokya Anahtar haritası</h2><p>İki Anahtarlı iki otel de Uçhisar'da ve ikisinin de ortak noktası aynı: <b>yerle bütünleşen kimlik + Michelin'in tanıdığı restoran + misafirin kendisi organize etmediği deneyim.</b> Mustafapaşa dezavantaj değil; listede Ürgüp ve Ortahisar otelleri de var.</p></div>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th></th><th class="hl">AJWA Cappadocia</th><th>Argos in Cappadocia</th><th>Museum Hotel</th></tr></thead>
+      <tbody>
+        <tr><td>Michelin</td><td class="hl">Seçkide yok</td><td>2 Anahtar</td><td>2 Anahtar</td></tr>
+        <tr><td>Konum</td><td class="hl">Mustafapaşa (Sinasos), 90 dönüm</td><td>Uçhisar, eski manastır, Güvercinlik Vadisi</td><td>Uçhisar, kale eteği</td></tr>
+        <tr><td>Oda</td><td class="hl">98 + 10 mağara süiti</td><td>71 (mağara + taş ev, özel mağara havuzlu)</td><td>~30 mağara/taş</td></tr>
+        <tr><td>Kimlik</td><td class="hl">Selçuklu–Osmanlı kervansaray, Azerbaycan zanaatı</td><td>Restore manastır, tüneller, şarap mahzeni, konser salonu</td><td>"Yaşayan müze": yüzlerce tescilli eser</td></tr>
+        <tr><td>Restoran</td><td class="hl">Zeferan (TripAdvisor 5,0) · Michelin'de yok</td><td>Seki + Nahita · ikisi de Michelin Selected</td><td>Lil'a · Michelin Selected, farm-to-table</td></tr>
+        <tr><td>Üyelik</td><td class="hl">Preferred Legend</td><td>Forbes listeli, bağımsız</td><td>Relais & Châteaux (Türkiye'de tek)</td></tr>
+        <tr><td>Farklılaştırıcı</td><td class="hl">Alkolsüz, aile odaklı, Kahve Müzesi, at çiftliği</td><td>Şarap + gastronomi + manzara</td><td>Sanat koleksiyonu + terastan balon</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Kayakapı Premium Caves (Ürgüp) da Bir Anahtar ve restoranı Revithia bir Michelin yıldızlı. Yani Michelin Rehberi Kapadokya restoranlarını değerlendiriyor: Zeferan için kapı açık (ayrıntı: Zeferan Cappadocia sekmesi).</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">2 · Bugün neredeyiz?</span><h2>Güçlü yanlar ve açıklar</h2><p>Kaynak: ajwa.com.tr Cappadocia sayfaları, Zeferan Cappadocia sitesi, TripAdvisor yorum örüntüleri, Michelin Kapadokya makaleleri ve Astra'nın sektör bilgisi.</p></div>
+  <div class="cols">
+    <div class="panel"><h3>Misafirin övdüğü</h3>
+      <ul>
+        <li><b>Temizlik 5,0:</b> "hiç bu kadar temiz otel görmedim" yorumlarda tekrar ediyor.</li>
+        <li><b>Zeferan:</b> Şef Ramil Bağırov, 47 yemek, safran, masa başı ritüeller (hamur kubbesi, semaver). Kasabanın en iyi restoranı sayılıyor.</li>
+        <li><b>Aile ürünü:</b> at çiftliği, çocuk kulübü, küçük hayvanat bahçesi, Kahve Müzesi (4,9 · 380 yorum). Argos ve Museum'da olmayan bir şey.</li>
+        <li><b>Personel:</b> "her isteğimiz karşılandı", yönetim her yoruma imzalı yanıt veriyor.</li>
+        <li><b>Fiyat/değer 4,9:</b> Sultanahmet'in tersine burada değer algısı güçlü.</li>
+      </ul>
+    </div>
+    <div class="panel"><h3>Tekrar eden açıklar</h3>
+      <ul>
+        <li><b>"Çok fazla kural":</b> cinsiyete göre havuz saatleri (kadınlara yalnızca öğleden sonra), alkolsüzlük ve geç check-in, satın alma öncesinde anlatılmıyor. Yorumlarda "separate times" ve "no alcohol" en sık geçen ifadeler.</li>
+        <li><b>İzole hissi:</b> araç şart, Göreme/Uçhisar'a mesafe. Arazi büyük ama "neden Mustafapaşa?" sorusunun cevabı misafire ulaşmıyor.</li>
+        <li><b>Oda iklimi:</b> sıcak odalar, termostat misafir kontrolünde değil, resepsiyona ulaşılamıyor. Mağara süitlerde ışık ve sıcaklık şikâyeti.</li>
+        <li><b>Sinasos bağı yok:</b> web sitesinde köyün Rum mimarisi, kiliseleri ve taş ustalığı hiç geçmiyor. Michelin'in "destinasyona katkı" kriteri burada boş.</li>
+        <li><b>Web sitesi:</b> Spa, About ve Deneyim sayfaları "more detail" ile geçiştiriliyor; mağara süitlerin yarısında metrekare bile yok. Arazi sitede ve TripAdvisor'da "90 acres" yazıyor; gerçek 90 dönüm (yaklaşık 22 acre). Yabancı misafire araziyi dört kat büyük vaat ediyor.</li>
+      </ul>
+    </div>
+  </div>
+  <figure style="margin-top:12px">
+    <svg viewBox="0 0 860 205" role="img" aria-label="TripAdvisor alt puanları 4.0 ile 5.0 arasında nokta grafiği">
+      <g class="svgtxt" font-size="12.5">
+        <line x1="180" y1="170" x2="820" y2="170" stroke="var(--line)"/>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="middle"><text x="180" y="188">4,0</text><text x="308" y="188">4,2</text><text x="436" y="188">4,4</text><text x="564" y="188">4,6</text><text x="692" y="188">4,8</text><text x="820" y="188">5,0</text></g>
+        <g stroke="var(--line)" stroke-dasharray="2 4"><line x1="308" y1="20" x2="308" y2="170"/><line x1="436" y1="20" x2="436" y2="170"/><line x1="564" y1="20" x2="564" y2="170"/><line x1="692" y1="20" x2="692" y2="170"/></g>
+        <g fill="var(--ink2)" text-anchor="end"><text x="160" y="35">Temizlik</text><text x="160" y="59">Fiyat / değer</text><text x="160" y="83">Odalar</text><text x="160" y="107">Hizmet</text><text x="160" y="131">Uyku kalitesi</text><text x="160" y="155" font-weight="700" fill="var(--ink)">Konum</text></g>
+        <g stroke="var(--line)"><line x1="180" y1="31" x2="820" y2="31"/><line x1="180" y1="55" x2="756" y2="55"/><line x1="180" y1="79" x2="756" y2="79"/><line x1="180" y1="103" x2="756" y2="103"/><line x1="180" y1="127" x2="692" y2="127"/><line x1="180" y1="151" x2="692" y2="151"/></g>
+        <g fill="var(--lapis)" stroke="var(--surface)" stroke-width="2"><circle cx="820" cy="31" r="7"/><circle cx="756" cy="55" r="7"/><circle cx="756" cy="79" r="7"/><circle cx="756" cy="103" r="7"/><circle cx="692" cy="127" r="7"/></g>
+        <circle cx="692" cy="151" r="7" fill="var(--pomeg)" stroke="var(--surface)" stroke-width="2"/>
+        <g fill="var(--ink)" font-size="12" font-weight="600"><text x="834" y="35">5,0</text><text x="770" y="59">4,9</text><text x="770" y="83">4,9</text><text x="770" y="107">4,9</text><text x="706" y="131">4,8</text><text x="706" y="155">4,8</text></g>
+      </g>
+    </svg>
+    <figcaption>TripAdvisor alt puanları, 497 yorum. Ürün güçlü; göreli zayıf nokta <b>konum</b>, yani "izole" algısı. Bu bir coğrafya sorunu değil, hikâye ve erişim sorunu: Sinasos'u satmak konum puanını yükseltir.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">3 · Neyi önce yapalım?</span><h2>Etki × kolaylık matrisi</h2><p>Sultanahmet'ten farklı olan işlere odaklandık: arazi, köy, balon sabahı, mağara süit konforu. Puanlar Astra ile ortak yönetim tahminidir.</p></div>
+  <figure>
+    <svg viewBox="0 0 860 460" role="img" aria-label="Etki ve kolaylık matrisi, 14 aksiyon">
+      <g class="svgtxt" font-size="12.5">
+        <rect x="455" y="40" width="365" height="180" fill="var(--lapis-soft)" opacity=".55" rx="4"/>
+        <text x="810" y="60" text-anchor="end" fill="var(--lapis)" font-size="11" font-weight="700" letter-spacing="1.5">ÖNCE BURADAN BAŞLA</text>
+        <g stroke="var(--line)" stroke-dasharray="2 4"><line x1="90" y1="130" x2="820" y2="130"/><line x1="90" y1="220" x2="820" y2="220"/><line x1="90" y1="310" x2="820" y2="310"/><line x1="272" y1="40" x2="272" y2="400"/><line x1="455" y1="40" x2="455" y2="400"/><line x1="637" y1="40" x2="637" y2="400"/></g>
+        <line x1="90" y1="400" x2="820" y2="400" stroke="var(--line)"/><line x1="90" y1="40" x2="90" y2="400" stroke="var(--line)"/>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="middle"><text x="90" y="420">zor</text><text x="455" y="420">kolaylık</text><text x="820" y="420">kolay</text></g>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="end"><text x="80" y="404">düşük</text><text x="80" y="222">etki</text><text x="80" y="46">yüksek</text></g>
+        <g fill="var(--lapis)" stroke="var(--surface)" stroke-width="2"><circle cx="820" cy="40" r="8"/><circle cx="790" cy="66" r="8"/><circle cx="637" cy="40" r="8"/><circle cx="608" cy="66" r="8"/><circle cx="637" cy="130" r="8"/><circle cx="820" cy="130" r="8"/><circle cx="665" cy="108" r="8"/></g>
+        <g fill="var(--brass)" stroke="var(--surface)" stroke-width="2"><circle cx="272" cy="40" r="8"/><circle cx="298" cy="66" r="8"/><circle cx="455" cy="130" r="8"/><circle cx="482" cy="156" r="8"/><circle cx="637" cy="220" r="8"/></g>
+        <g fill="var(--pomeg)" stroke="var(--surface)" stroke-width="2"><circle cx="90" cy="130" r="8"/><circle cx="90" cy="220" r="8"/></g>
+        <g fill="var(--ink)" font-size="12" font-weight="600">
+          <text x="808" y="30" text-anchor="end">Kurallar için beklenti netliği</text>
+          <text x="778" y="84" text-anchor="end">Balon sabahı protokolü</text>
+          <text x="625" y="30" text-anchor="end">Oda iklimi + ulaşılabilir resepsiyon</text>
+          <text x="596" y="84" text-anchor="end">Sinasos 60–90 dk rota pilotu</text>
+          <text x="625" y="148" text-anchor="end">Mağara süit konfor kontrolü</text>
+          <text x="808" y="120" text-anchor="end">Üzüm–pekmez–şıra tadımı</text>
+          <text x="677" y="104">Tesisleri hikâyeye bağla</text>
+          <text x="284" y="30">Havuz programı: aile slotu</text>
+          <text x="310" y="84">Bağımsız gizli denetim</text>
+          <text x="443" y="120" text-anchor="end">Bağ / bahçe hasat programı</text>
+          <text x="494" y="178">Zeferan'ı Michelin'e hazırla</text>
+          <text x="625" y="240" text-anchor="end">Yürüyüş rotaları + gökyüzü gecesi</text>
+          <text x="102" y="120">Mağara iklim / ışık CAPEX</text>
+          <text x="102" y="210">Ulaşım + gece aydınlatma altyapısı</text>
+        </g>
+      </g>
+    </svg>
+    <div class="legend"><span><i style="background:var(--lapis)"></i>0–3 ay</span><span><i style="background:var(--brass)"></i>3–12 ay</span><span><i style="background:var(--pomeg)"></i>12+ ay</span></div>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">4 · 0–3 ay</span><h2>Ufak aksiyon, büyük fark</h2><p>Sıfıra yakın CAPEX. Hepsi ya "çok fazla kural" şikâyetini ya da "neden Mustafapaşa?" boşluğunu kapatır.</p></div>
+  <div class="actions">
+    <div class="act"><div class="rank">1</div><div><h3>Kuralları sürpriz olmaktan çıkar</h3><p>Web, OTA ve rezervasyon onayında aynı metin: alkol servisi yoktur; havuz ve hamam saatleri kadın/erkek için şöyledir; araç gerekir, transfer şu kadar sürer; balon manzarası odadan görünmez, kalkış alanına transfer vardır. "90 acres" ifadesini "90 dönüm / 9 hektar" olarak düzelt. Varıştan 48 saat önce kısa mesajla tekrar.</p><p class="why">Neden: "separate times" ve "no alcohol" yorumlarda en sık geçen ifadeler. Kural değişmese bile sürpriz kalkar.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 5</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">2</div><div><h3>Balon sabahı protokolü</h3><p>Bir önceki akşam teyit; uyandırma tercihi, sıcak içecek, taşınabilir kahvaltı, araç takibi, dönüşte sıcak kahvaltı. İptal olursa hazır alternatif: gün doğumunda arazi yürüyüşü ve at çiftliği.</p><p class="why">Neden: Kapadokya'da konaklamanın ritmini balon belirler. Hatırlanan an burada kazanılır veya kaybedilir.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 5</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">3</div><div><h3>Oda iklimi misafirin elinde, resepsiyon her zaman ulaşılabilir</h3><p>Termostatları misafir kontrolüne aç veya oda tanıtımında nasıl ayarlandığını göster. Her vardiyada çağrı sorumlusu; cevapsız çağrıya 10 dakikada geri dönüş; her talebin tek sahibi ve kapanış teyidi.</p><p class="why">Neden: "odalar sıcaktı, resepsiyona ulaşamadık" tek başına bir konaklamayı batıran şikâyet. Forbes'un 3 çalışta cevap standardı.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">4</div><div><h3>Sinasos'ta 60–90 dakikalık yerel rota pilotu</h3><p>Yerel rehberle: Rum konakları, Aios Konstantinos-Eleni kilisesi, taş ustası atölyesi, Gomeda Vadisi girişi. Küçük grup, ücretini doğrudan alan bir üretici veya usta, köy hayatına saygılı saatler. Web'de "Neden Mustafapaşa?" sayfası bu rotayla açılır.</p><p class="why">Neden: Michelin'in "destinasyona katkı" kriteri bugün boş. İzole algısını "gizli köy" avantajına çevirir.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">5</div><div><h3>Üzüm, pekmez, şıra: Zeferan'da toprak hikâyesi</h3><p>Yerel üreticiden üç küçük tat ve hikâyesi; Şah Pilav ve Piti ile eşleşen alkolsüz menü. Kapadokya bağcılığının tarihi anlatılır, şarap yerine şıra ve pekmez sunulur. Kahvaltıda arazinin kendi ürünü masada tanıtılır.</p><p class="why">Neden: Argos şarap mahzeniyle, Museum farm-to-table ile fark yaratıyor. AJWA'nın cevabı alkolsüz terroir olabilir. Ayrıntı: Zeferan Cappadocia sekmesi.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 5</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">6</div><div><h3>Mevcut tesisleri tek hikâyeye bağla</h3><p>Kahve Müzesi, Clay of Cappadocia seramik atölyesi, Verni galeri, at çiftliği ve yurtlar bugün ayrı ayrı duruyor. "Kervansaray günü" olarak tek bir günlük akış: sabah at, öğle seramik, akşam üstü kahve tadımı, gece yurtta çay. Mağara süitlerde ışık, nem ve sıcaklık kontrolü aynı hafta.</p><p class="why">Neden: Michelin'in "karakter" kriteri dekorla değil, misafirin yaşadığı günle ölçülür. Eldeki varlıklar Argos'ta yok.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">5 · Sonraki adımlar</span><h2>Orta vade ve yapısal yatırım</h2></div>
+  <div class="phases">
+    <div class="phase mid"><span class="tag">3–12 ay · sistem kurma</span>
+      <ol>
+        <li><b>Havuz programını yeniden tasarla.</b> Reddedilen talepleri ölç; kadın saatlerini öğleden sonraya sıkıştırmak yerine dengeli program ve rezervasyonlu aile/özel slot. Bilgilendirme erişim sorununu tek başına çözmez.</li>
+        <li><b>Zeferan'ı Michelin restoran değerlendirmesine hazırla.</b> Menü kimliği, ürün kaynağı, servis tutarlılığı, alkolsüz eşleşmeler. Rehber Kapadokya'yı kapsıyor (Revithia bir yıldızlı). Seçki garanti değil, hazırlık şart.</li>
+        <li><b>Bağ ve bahçeyi hasat programına çevir.</b> 90 dönümün gerçekten kullanılabilir kısmını belirle; mevsimsel üretim, misafirle hasat, Zeferan'a doğrudan tedarik. Museum Hotel'in farm-to-table cevabı.</li>
+        <li><b>Bağımsız gizli denetim.</b> LQA/Forbes çerçevesiyle erken/geç vardiya, transfer ve arazi içi hizmet testi.</li>
+        <li><b>Yürüyüş rotaları ve gökyüzü gecesi.</b> Beydere ve Gomeda'ya kontrol edilmiş rotalar, oturma noktaları; uygun gecelerde küçük gökyüzü buluşması. Mevcut imkânla pilot.</li>
+        <li><b>Ölçüm.</b> Köyde harcanan tutar, yerel tedarik oranı, misafir-gece başına su/enerji, gıda atığı. Ariana'nın Anahtarı sürdürülebilirliğin tek başına ödül getirdiğini kanıtlamaz, ama LQA'nın 8 kriterinden biri.</li>
+      </ol>
+    </div>
+    <div class="phase long"><span class="tag">12+ ay · kanıta dayalı CAPEX</span>
+      <ol>
+        <li><b>Mağara süitlerde iklim ve ışık.</b> Havalandırma, nem kontrolü, okuma ışığı, gece yönlendirmesi. Ölçülen şikâyete göre, oda bazında.</li>
+        <li><b>Arazi içi ulaşım ve erişilebilir güzergâhlar.</b> Üç bina ve mağara süitler arası mesafe; gölgelendirme; golf aracı düzeni.</li>
+        <li><b>Gece aydınlatması.</b> Işık kirliliğini azaltan armatürler: gökyüzü deneyiminin altyapısı ve sürdürülebilirlik anlatısının kanıtı.</li>
+        <li><b>Suya uygun peyzaj.</b> Verimli sulama, yerel bitki örtüsü.</li>
+        <li><b>Yeni havuz, ahır veya wellness genişlemesi.</b> Yalnızca kullanım verisi ve fizibilite destekliyorsa.</li>
+      </ol>
+      <p class="note">Astra'nın notu: Geniş arazi kendi başına üstünlük değil. Yapıların peyzajla ilişkisi, yürünebilirlik ve mağara süitlerin yaşama konforu Michelin'in "mimari" kriterinde asıl ölçülen şey.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">6 · Michelin'in radarına girmek</span><h2>Başvuru yok, görünürlük var</h2><p>Michelin Anahtarı için resmî başvuru yapılmaz ve derece satın alınamaz. Müfettişlerin oteli fark etmesini kolaylaştıran gerçekçi yollar:</p></div>
+  <div class="steps">
+    <div class="step"><div class="n">YOL 1</div><h3>Michelin otel platformu</h3><p>AJWA Sultanahmet Michelin'in otel sayfasında listeli; Cappadocia değil. Güncel fotoğraf, kategori, konum ve rezervasyon bilgisiyle kayıt durumu kontrol edilmeli.</p></div>
+    <div class="step"><div class="n">YOL 2</div><h3>Zeferan üzerinden</h3><p>Michelin Rehberi Kapadokya restoranlarını değerlendiriyor. 5,0 puanlı, 1.058 yorumlu Zeferan en güçlü kapı. Restoran seçkisi otele Anahtar sağlamaz, ama müfettişi araziye getirir.</p></div>
+    <div class="step"><div class="n">YOL 3</div><h3>Haber değeri</h3><p>Sinasos ortaklıkları, belgelenmiş zanaat, hasat programı, ölçülen çevre verisi. Editoryal haber ile ücretli içerik ayrılmalı.</p></div>
+    <div class="step"><div class="n">YOL 4</div><h3>Preferred Legend ağı</h3><p>Mevcut üyeliğin satış, basın ve danışman erişimini kullan. Legend statüsü Michelin'e geçiş yolu değildir; görünürlük kanalıdır.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">7 · Argos ve Museum'dan öğrenilecek</span><h2>Kopyalamadan öğrenmek</h2></div>
+  <div class="steps three">
+    <div class="step"><div class="n">1</div><h3>Yerle bütünleşen kimlik</h3><p>Argos manastırın tünellerini, Museum tescilli eserlerini anlatıyor. AJWA'nın karşılığı: kendi eserlerini belgelemek ve Sinasos'la gerçek, doğrulanabilir bağ kurmak. Kervansaray konsepti Mustafapaşa'nın İpek Yolu geçmişiyle birleşince hikâye tamamlanır.</p></div>
+    <div class="step"><div class="n">2</div><h3>Hatırlanan anlar</h3><p>Manzara, yemek, teras, mahzen: rakiplerde konaklamanın ritmi belli. AJWA'da karşılığı: bahçede kahvaltı, mağara süitte akşam hazırlığı, balon sabahı, gökyüzü gecesi, semaver çayı.</p></div>
+    <div class="step"><div class="n">3</div><h3>Zahmetsiz özgünlük</h3><p>Misafir deneyimi kendisi organize etmesin. Tek temas noktası rehberi, transferi, yemeği ve hava koşuluna göre B planını yönetsin. 108 anahtar ve dağınık arazi bunu Sultanahmet'ten daha zor ve daha değerli kılıyor.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="north"><span class="eyebrow">Yatırımcıya tek cümle</span><p>"AJWA Cappadocia'yı, Sinasos'un yaşayan mirasını, Kapadokya'nın toprağını ve gökyüzünü kişisel ve zahmetsiz bir konaklamada buluşturan Mustafapaşa adresi yapmak."</p><p class="sub">İlk 90 günün ölçüsü: "kural sürprizi" şikâyeti, cevapsız çağrı, oda sıcaklığı şikâyeti ve balon sabahı aksaklığı sayısı düşsün; Sinasos rotasına katılım ve köyde harcanan tutar artsın.</p></div>
+  <div class="caveats"><h3>Doğrulama notları (Astra'nın uyarıları)</h3>
+    <ul>
+      <li>Michelin'in AJWA Cappadocia'yı değerlendirip değerlendirmediği bilinmiyor; "seçkide yok" bir sonuçtur, gerekçe değil. Buradaki açıklar beş kritere göre yapılmış ürün karşılaştırmasıdır.</li>
+      <li>Argos ve Museum Hotel'in İki Anahtar gerekçeleri Michelin'in açıkladığı karar metinleri değil, müfettiş tanıtım yazılarından çıkarımdır.</li>
+      <li>Şıra alkol içeriği ve helal uyumu servis öncesinde doğrulanmalı. Sinasos rotasındaki durakların erişim izinleri yerel yönetimle teyit edilmeli.</li>
+      <li>Balon manzarası ve kalkış alanına mesafe uçuş sahasına ve hava koşuluna bağlıdır; web'de yalnızca gerçekten sunulabilen vaat edilmeli.</li>
+    </ul>
+  </div>
+</section>
+
+<footer><b style="color:var(--ink2)">Kaynaklar · AJWA Cappadocia</b>
+  <ul>
+    <li><a href="https://www.ajwa.com.tr/cappadocia/mainpage.aspx">ajwa.com.tr/cappadocia</a> (ana sayfa, oda/süit, mağara süitler, About, Deneyim, Spa)</li>
+    <li><a href="https://www.cappadocia.zeferan.com.tr/en">Zeferan Cappadocia</a></li>
+    <li><a href="https://www.tripadvisor.com/Hotel_Review-g635898-d21275092-Reviews-AJWA_Cappadocia-Mustafapasa_Urgup_Cappadocia.html">TripAdvisor · AJWA Cappadocia</a></li>
+    <li><a href="https://www.oggusto.com/seyahat/michelin-key-turkiye-otelleri">OGGUSTO · Michelin Key Türkiye 2026 listesi</a></li>
+    <li><a href="https://www.turizmguncel.com/haber/michelin-anahtari-alan-oteller-arasina-470-tane-daha-eklendi-turkiyeden-1-otel-3-anahtar-aldi">Turizm Güncel · Kapadokya Anahtar listesi</a></li>
+    <li><a href="https://guide.michelin.com/hu/en/hotels-stays/nevsehir/argos-in-cappadocia-3941">Michelin Guide · Argos in Cappadocia</a></li>
+    <li><a href="https://guide.michelin.com/en/article/travel/turkiye-cappadocia-hotels-with-standout-restaurants">Michelin · Kapadokya otelleri ve restoranları</a></li>
+    <li><a href="https://www.horecatrend.com/en/2025/10/10/kapadokyada-dokuz-otel-michelin-key-listesine-girdi/">Horeca Trend · Kapadokya 2025 Anahtar seçkisi</a></li>
+    <li><a href="https://www.americanexpress.com/en-us/travel/discover/property/Turkey/Nevsehir/Ajwa-Cappadocia">Amex FHR · AJWA Cappadocia</a></li>
+    <li>GPT Astra (Codex) · çok turlu danışma, 26 Eylül 2026</li>
+  </ul>
+</footer>
+</div><!-- /tab-cappadocia -->
+
+<!-- ============================================================ -->
+<!-- SEKME 3 · ZEFERAN SULTANAHMET                                   -->
+<!-- ============================================================ -->
+<div id="tab-zeferan-sultanahmet" role="tabpanel" aria-labelledby="btn-zeferan-sultanahmet" hidden>
+
+<header class="hero">
+  <div class="eyebrow"><span>AJWA Sultanahmet · 8. kat rooftop</span><span>Azerbaycan mutfağı · alkolsüz</span><span>Executive Chef Ramin Nuriyev</span></div>
+  <h1>Zeferan Sultanahmet: Michelin restoran seçkisine giden yol</h1>
+  <p class="lede">İstanbul'un en kalabalık gastronomi seçkisinde, 13.541 restoran içinde TripAdvisor #10 olan bir rooftop var elimizde. Michelin'de ise yok. Gerçekçi ilk hedef <b>Michelin Selected</b>. Bu sekme, otel restoranlarını seçkiden uzak tutan tuzakları, Zeferan'ın bugünkü durumunu ve tabaktan başlayan aksiyonları sıralar.</p>
+  <div class="kpis">
+    <div class="kpi goal"><b>Selected</b><small>Gerçekçi ilk hedef · Türkiye 2026'da 115 restoran</small></div>
+    <div class="kpi"><b>4,9</b><small>TripAdvisor · İstanbul'da 13.541 restoran içinde #10</small></div>
+    <div class="kpi"><b>1.479</b><small>yorum · Travelers' Choice 2026 · $$$$</small></div>
+    <div class="kpi"><b>5,0</b><small>Servis puanı · Yemek 4,9 · Değer 4,8</small></div>
+    <div class="kpi"><b>120</b><small>kişi kapasite · 07:30–23:00 · kahvaltı + öğle + akşam</small></div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">1 · Michelin restoranda neye bakar?</span><h2>Beş kriter, tek ölçüm: tabak</h2><p>Michelin restoran müfettişleri dekoru, manzarayı ve servisi puanlamaz. Yalnızca yemeği değerlendirir. Başvuru yoktur, müfettiş anonimdir ve hesabı öder. Selected, Bib Gourmand ve Yıldız bir merdiven değil, üç farklı tanımadır: Bib "uygun fiyata iyi yemek"tir; lüks bir restoranın ara durağı olmak zorunda değildir.</p></div>
+  <div class="crit">
+    <div class="c"><b>1 · Malzeme kalitesi</b><span>Safran nereden, kuzu kimden? Adı olan tedarikçi.</span></div>
+    <div class="c"><b>2 · Teknik ustalık</b><span>Şah Pilav'ın kazmağı, Piti'nin pişme süresi her seferinde aynı.</span></div>
+    <div class="c"><b>3 · Lezzet uyumu</b><span>Tabakta denge; tören ve manzara telafi etmez.</span></div>
+    <div class="c"><b>4 · Şefin kişiliği</b><span>Menü kimin? Tavuk ciğeri pate ve Olivier salatası kimin?</span></div>
+    <div class="c"><b>5 · Tutarlılık</b><span>Öğle ve akşam, şefin izin günü, yoğun cumartesi: aynı tabak.</span></div>
+  </div>
+  <figure style="margin-top:12px">
+    <svg viewBox="0 0 860 230" role="img" aria-label="Michelin Türkiye 2026 restoran seçkisinin dağılımı">
+      <g class="svgtxt" font-size="12.5">
+        <g fill="var(--ink2)" text-anchor="end"><text x="190" y="44">Selected</text><text x="190" y="88">Bib Gourmand</text><text x="190" y="132">1 Yıldız</text><text x="190" y="176">2 Yıldız</text></g>
+        <rect x="200" y="30" width="600" height="20" rx="4" fill="var(--brass)"/>
+        <rect x="200" y="74" width="203" height="20" rx="4" fill="var(--lapis)"/>
+        <rect x="200" y="118" width="78" height="20" rx="4" fill="var(--lapis)"/>
+        <rect x="200" y="162" width="12" height="20" rx="4" fill="var(--lapis)"/>
+        <g fill="var(--ink)" font-size="12" font-weight="600"><text x="810" y="45">115</text><text x="413" y="89">39</text><text x="288" y="133">15</text><text x="222" y="177">2</text></g>
+        <text x="810" y="27" text-anchor="end" fill="var(--brass)" font-size="11" font-weight="700" letter-spacing="1.5">HEDEF</text>
+        <line x1="200" y1="196" x2="800" y2="196" stroke="var(--line)"/>
+        <text x="200" y="216" fill="var(--muted)" font-size="11.5">Michelin Rehberi Türkiye 2026 · 171 restoran · ayrıca 13 Yeşil Yıldız · İstanbul, İzmir, Muğla, Kapadokya · 2027'de tüm Türkiye</text>
+      </g>
+    </svg>
+    <figcaption>Selected, seçkinin en geniş katmanı ve otel restoranları için en gerçekçi giriş. İstanbul'dan iki otel restoranı benchmark: <b>Tuğra</b> (Çırağan Kempinski, Osmanlı, Selected + Servis Ödülü) ve Sultanahmet'te <b>Deraliye</b> (Osmanlı, paylaşım menüsü, Selected). Alkolsüzlük engel değil: Nişantaşı'ndaki <b>Tatbak</b> alkolsüz ve Bib Gourmand.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">2 · Bugün neredeyiz?</span><h2>Güçlü yanlar ve açıklar</h2><p>Kaynak: sultanahmet.zeferan.com.tr, TripAdvisor yorumları (son 1.139 yorumun örüntüsü), Michelin Guide İstanbul sayfaları ve Astra'nın sektör bilgisi.</p></div>
+  <div class="cols">
+    <div class="panel"><h3>Elimizdeki güç</h3>
+      <ul>
+        <li><b>Şef görünür:</b> Ramin Nuriyev Azerbaycan'da TV programı yapıyor, Rusça konuşuyor, masaları geziyor. Yorumlarda ismen teşekkür alıyor. Michelin'in "şefin kişiliği" kriteri için hazır malzeme.</li>
+        <li><b>İmza tabaklar var:</b> Şah Pilav, Piti, düşbere, vişneli köfte, Bakü baklavası. "Azerbaycan'daki gibi" diyen diaspora yorumları otantiklik kanıtı.</li>
+        <li><b>Servis 5,0:</b> Erol, Hasan, Esra isimleri tekrar ediyor. Michelin puanlamaz ama müfettişin akşamını belirler.</li>
+        <li><b>Alkolsüz içecek denemeleri başlamış:</b> nane ve gül limonatası, şerbet ikramı yorumlarda geçiyor.</li>
+        <li><b>Helal, vegan ve glutensiz seçenek</b> listede; kapasite 120, manzara İstanbul'un en iyilerinden.</li>
+      </ul>
+    </div>
+    <div class="panel"><h3>Michelin gözüyle açıklar</h3>
+      <ul>
+        <li><b>Kimlik bulanıklığı:</b> TripAdvisor kategorisi "International, Azerbaijani". Menü tavuk ciğeri pate ve focaccia amuse bouche ile açılıyor; Rus misafire Olivier salatası ikram ediliyor. Kriter 4 ve 5'e doğrudan ters.</li>
+        <li><b>Kahvaltı salonu = akşam restoranı:</b> aynı mekân, aynı ekipman, 07:30–23:00 kesintisiz. Bir öğle yorumu: "garson yoktu, resepsiyonist yönetiyordu, yemekler basitti, fiyat yüksekti".</li>
+        <li><b>İki şef ismi:</b> Ramin executive, Ceyhun Doğan head chef. Yorumlarda ikisi de teşekkür alıyor. Mutfağın tek yüzü kim?</li>
+        <li><b>Web sitesi:</b> ödül yok, tedarikçi yok, alkol politikası yazılmıyor, tam menü yok. Şah Pilav €75 ama kaç kişilik olduğu belirsiz.</li>
+        <li><b>Fiyat/değer 4,8:</b> en düşük alt puan, $$$$ etiket. Michelin'in "uygun fiyat" kategorisi olan Bib bu fiyatlarla hedef olamaz.</li>
+      </ul>
+    </div>
+  </div>
+  <figure style="margin-top:12px">
+    <svg viewBox="0 0 860 160" role="img" aria-label="TripAdvisor alt puanları 4.0 ile 5.0 arasında nokta grafiği">
+      <g class="svgtxt" font-size="12.5">
+        <line x1="180" y1="125" x2="820" y2="125" stroke="var(--line)"/>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="middle"><text x="180" y="143">4,0</text><text x="308" y="143">4,2</text><text x="436" y="143">4,4</text><text x="564" y="143">4,6</text><text x="692" y="143">4,8</text><text x="820" y="143">5,0</text></g>
+        <g stroke="var(--line)" stroke-dasharray="2 4"><line x1="308" y1="20" x2="308" y2="125"/><line x1="436" y1="20" x2="436" y2="125"/><line x1="564" y1="20" x2="564" y2="125"/><line x1="692" y1="20" x2="692" y2="125"/></g>
+        <g fill="var(--ink2)" text-anchor="end"><text x="160" y="35">Servis</text><text x="160" y="59" font-weight="700" fill="var(--ink)">Yemek</text><text x="160" y="83">Atmosfer</text><text x="160" y="107">Fiyat / değer</text></g>
+        <g stroke="var(--line)"><line x1="180" y1="31" x2="820" y2="31"/><line x1="180" y1="55" x2="756" y2="55"/><line x1="180" y1="79" x2="756" y2="79"/><line x1="180" y1="103" x2="692" y2="103"/></g>
+        <g fill="var(--lapis)" stroke="var(--surface)" stroke-width="2"><circle cx="820" cy="31" r="7"/><circle cx="756" cy="79" r="7"/><circle cx="692" cy="103" r="7"/></g>
+        <circle cx="756" cy="55" r="7" fill="var(--pomeg)" stroke="var(--surface)" stroke-width="2"/>
+        <g fill="var(--ink)" font-size="12" font-weight="600"><text x="834" y="35">5,0</text><text x="770" y="59">4,9</text><text x="770" y="83">4,9</text><text x="706" y="107">4,8</text></g>
+      </g>
+    </svg>
+    <figcaption>TripAdvisor alt puanları, 1.479 yorum. Michelin'in tek ölçtüğü satır <b>yemek</b>. Servis ve atmosfer puanı müfettişi etkilemez; yemek puanının yüksekliği ise şefin tabağı her servis aynı çıkardığında anlam kazanır.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">3 · Neyi önce yapalım?</span><h2>Etki × kolaylık matrisi</h2><p>Etki, tabak kalitesine ve keşfedilmeye katkıyı ölçer; Michelin sonucu garantisi değildir. Puanlar Astra ile ortak yönetim tahminidir.</p></div>
+  <figure>
+    <svg viewBox="0 0 860 460" role="img" aria-label="Etki ve kolaylık matrisi, 13 aksiyon">
+      <g class="svgtxt" font-size="12.5">
+        <rect x="455" y="40" width="365" height="180" fill="var(--lapis-soft)" opacity=".55" rx="4"/>
+        <text x="810" y="60" text-anchor="end" fill="var(--lapis)" font-size="11" font-weight="700" letter-spacing="1.5">ÖNCE BURADAN BAŞLA</text>
+        <g stroke="var(--line)" stroke-dasharray="2 4"><line x1="90" y1="130" x2="820" y2="130"/><line x1="90" y1="220" x2="820" y2="220"/><line x1="90" y1="310" x2="820" y2="310"/><line x1="272" y1="40" x2="272" y2="400"/><line x1="455" y1="40" x2="455" y2="400"/><line x1="637" y1="40" x2="637" y2="400"/></g>
+        <line x1="90" y1="400" x2="820" y2="400" stroke="var(--line)"/><line x1="90" y1="40" x2="90" y2="400" stroke="var(--line)"/>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="middle"><text x="90" y="420">zor</text><text x="455" y="420">kolaylık</text><text x="820" y="420">kolay</text></g>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="end"><text x="80" y="404">düşük</text><text x="80" y="222">etki</text><text x="80" y="46">yüksek</text></g>
+        <!-- 0–3 ay -->
+        <g fill="var(--lapis)" stroke="var(--surface)" stroke-width="2">
+          <circle cx="637" cy="40" r="8"/>   <!-- tutarlılık denetimi 5x4 -->
+          <circle cx="608" cy="66" r="8"/>   <!-- Azerbaycan çekirdeği 5x4 -->
+          <circle cx="820" cy="130" r="8"/>  <!-- dijital kimlik 4x5 -->
+          <circle cx="637" cy="130" r="8"/>  <!-- akşamı kahvaltıdan ayır 4x4 -->
+          <circle cx="665" cy="108" r="8"/>  <!-- şef + ürün hikâyesi 4x4 -->
+          <circle cx="455" cy="130" r="8"/>  <!-- alkolsüz eşleştirme 4x3 -->
+          <circle cx="820" cy="220" r="8"/>  <!-- benchmark yemeği 3x5 -->
+        </g>
+        <!-- 3–12 ay -->
+        <g fill="var(--brass)" stroke="var(--surface)" stroke-width="2">
+          <circle cx="482" cy="156" r="8"/>  <!-- tadım menüsü 4x3 -->
+          <circle cx="428" cy="108" r="8"/>  <!-- bölgesel seçkiler 4x3 -->
+          <circle cx="272" cy="40" r="8"/>   <!-- bağımsız gastronomi denetimi 5x2 -->
+          <circle cx="272" cy="220" r="8"/>  <!-- Yeşil Yıldız ölçüm 3x2 -->
+        </g>
+        <!-- 12+ ay -->
+        <g fill="var(--pomeg)" stroke="var(--surface)" stroke-width="2">
+          <circle cx="90" cy="220" r="8"/>   <!-- mutfak CAPEX 3x1 -->
+          <circle cx="90" cy="130" r="8"/>   <!-- chef's table alanı 4x1 -->
+        </g>
+        <g fill="var(--ink)" font-size="12" font-weight="600">
+          <text x="649" y="30">İmza tabaklarda tutarlılık denetimi</text>
+          <text x="596" y="84" text-anchor="end">Azerbaycan çekirdeğini öne çıkar</text>
+          <text x="808" y="120" text-anchor="end">Web + Google + TA kimliği</text>
+          <text x="625" y="148" text-anchor="end">Akşamı kahvaltıdan ayır</text>
+          <text x="677" y="104">Şef + ürün hikâyesi</text>
+          <text x="443" y="148" text-anchor="end">Alkolsüz eşleştirme pilotu</text>
+          <text x="808" y="210" text-anchor="end">Deraliye / Tuğra'da benchmark yemeği</text>
+          <text x="494" y="178">Tadım menüsü (5–6 servis)</text>
+          <text x="416" y="98" text-anchor="end">Bölgesel seçkiler: Şeki, Lenkeran…</text>
+          <text x="284" y="30">Bağımsız gastronomi denetimi</text>
+          <text x="284" y="240">Yeşil Yıldız için ölçüm</text>
+          <text x="102" y="120">Chef's table alanı</text>
+          <text x="102" y="210">Mutfak CAPEX (ölçülen soruna)</text>
+        </g>
+      </g>
+    </svg>
+    <div class="legend"><span><i style="background:var(--lapis)"></i>0–3 ay</span><span><i style="background:var(--brass)"></i>3–12 ay</span><span><i style="background:var(--pomeg)"></i>12+ ay</span></div>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">4 · 0–3 ay</span><h2>Ufak aksiyon, büyük fark</h2><p>Hepsi mutfak ve iletişim içinde; CAPEX yok. Sıra Michelin'in kriter sırasıyla aynı: önce tutarlılık ve kimlik, sonra görünürlük.</p></div>
+  <div class="actions">
+    <div class="act"><div class="rank">1</div><div><h3>İmza tabaklarda tutarlılık denetimi</h3><p>Şah Pilav, Piti, kuzu pirzola, düşbere ve baklavayı beş farklı gün ve vardiyada, şefin izin günü dahil, aynı formla değerlendir: sıcaklık, kıvam, pişme, porsiyon, bekleme süresi, tabak fotoğrafı. Sapma görülen tabağın reçetesini ve hazırlık akışını yaz.</p><p class="why">Neden: Michelin'in 5. kriteri. Müfettiş büyük ihtimalle şefin masada olmadığı bir öğle veya salı akşamı gelir.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">2</div><div><h3>Azerbaycan çekirdeğini menünün merkezine al</h3><p>6–8 imzayı menünün ilk sayfasına; "Türk ve uluslararası" seçenekleri ayrı bir bölüme. Amuse bouche'u Azerbaycanlı yap (kutab dilimi, narlı badımcan): tavuk ciğeri pate ve focaccia, "şefin kişiliği" sorusuna yanlış cevap. Milliyete göre ikramı (Olivier) kimliğe bağlı ikrama çevir: mangal salatası, çay. Tutarsız veya az satan tabakları veriye göre azalt.</p><p class="why">Neden: TripAdvisor kategorisi bugün "International, Azerbaijani". Müfettiş menüyü okuduğunda tek bir mutfak görmeli.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">3</div><div><h3>Web, Google ve TripAdvisor kimliğini düzelt</h3><p>Kategori yalnızca "Azerbaijani"; fiyatlı tam menü; Şah Pilav'ın kaç kişilik olduğu; Ramin Nuriyev'in biyografisi ve mutfağın tek yüzü olduğu; "alkol servisi yoktur, eşleştirme menümüz vardır" cümlesi; otel dışı misafir için rezervasyon, asansör ve otopark bilgisi. TripAdvisor listesini yönetim olarak sahiplen (bugün yönetim yanıtı yok).</p><p class="why">Neden: müfettiş rezervasyon öncesinde bunları okur. Bugün web sitesinde ödül, tedarikçi ve alkol politikası yok.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 5</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">4</div><div><h3>Akşamı kahvaltıdan ayır, öğleyi kadrola</h3><p>18:30'dan sonra masa düzeni, ışık, müzik ve karşılama değişsin; kahvaltı büfesi ve ekipmanı görünmesin. Lobide ve sokakta "Zeferan, 8. kat" yönlendirmesi. Öğle servisine tanımlı garson kadrosu: resepsiyonist servis yönetmesin. Yeni isim veya ayrı giriş inşaatı ilk ihtiyaç değil.</p><p class="why">Neden: "otel kahvaltı salonu" algısı Michelin kriteri değil, ama akşam da kahvaltı temposu sürerse tutarlılık kriteri düşer. Öğle yorumu bunu gösteriyor.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">5</div><div><h3>Şef ve ürün hikâyesini standardize et</h3><p>Ramin'in masa ziyaretlerini plana bağla (her servis 3–4 masa, tabak kalitesi ziyarete bağlı olmasın). Üç imza için 30 saniyelik doğrulanmış anlatım: safranın kökeni, kuzunun tedarikçisi, narın bölgesi. Servis ekibi tadıp öğrenir; ezber değil, cevap verebilme.</p><p class="why">Neden: Michelin'in 1. ve 4. kriteri. "Her malzeme özenle seçilir" cümlesi kanıt değil; tedarikçi adı kanıttır.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">6</div><div><h3>Deraliye ve Tuğra'da benchmark yemeği</h3><p>Mutfak ve servis liderleri normal rezervasyonla, hesabını ödeyerek iki Selected restoranda yemek yesin. Aynı form: toplam hesap, tabak tutarlılığı, servis süresi, kimliğin menüden okunabilirliği, alkolsüz seçenekler. Müfettiş gibi değil, misafir gibi.</p><p class="why">Neden: seçkinin çıtasını tahmin etmek yerine görmek. İki akşam, iki hesap; bir haftalık iş.</p></div><div class="score"><small>etki × kolaylık</small><b>3 × 5</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">5 · Sonraki adımlar</span><h2>Orta vade ve yapısal yatırım</h2></div>
+  <div class="phases">
+    <div class="phase mid"><span class="tag">3–12 ay · derinlik</span>
+      <ol>
+        <li><b>Alkolsüz eşleştirme programı.</b> Koruk, çay ve nar/şerbet ekseninde küçük porsiyonlar; şeker yükü, asidite, yemek uyumu ve maliyet ölçülür. Pilot 0–3 ayda başlar, program 6. ayda menüye girer.</li>
+        <li><b>İsteğe bağlı tadım menüsü (5–6 servis).</b> Çekirdek menü oturduktan sonra; à la carte kalır. Müfettişe şefin bütün cümlesini tek oturuşta gösterir.</li>
+        <li><b>Bölgesel seçkiler.</b> Şeki, Lenkeran, Gence ve Karabağ mutfaklarını sırayla ele alan, kökeni araştırılmış mevsimsel bölümler. "Azerbaycan mutfağı" tek bir şey değil; derinlik burada.</li>
+        <li><b>Bağımsız gastronomi denetimi.</b> Farklı mevsimlerde anonim değerlendirme; bulgular reçete ve eğitimle kapanır. Yıldız hedefi ancak bu sonuçlardan sonra konuşulur.</li>
+        <li><b>Chef's table denemesi.</b> Mevcut alanda ayda iki sınırlı akşam; talep ve marj ölçülür.</li>
+        <li><b>Yeşil Yıldız için ölçüm.</b> Porsiyon başına gıda atığı, satın alma kaynakları, su/enerji. Yeşil Yıldız ayrı bir tanımadır; yerel ürün kullanmak tek başına yetmez.</li>
+      </ol>
+    </div>
+    <div class="phase long"><span class="tag">12+ ay · kanıta dayalı CAPEX</span>
+      <ol>
+        <li><b>Mutfak yatırımı ölçülen soruna.</b> Fırın kapasitesi, sıcaklık kontrolü, servis çıkışı veya saklama koşulları: hangisi tutarlılığı bozuyorsa o.</li>
+        <li><b>Chef's table alanı.</b> Denemeler dolduysa kalıcı alan; dolmadıysa yapılmaz.</li>
+        <li><b>Ayrı giriş / akşam kimliği.</b> Yalnızca "otel restoranı" algısı denetimde ölçülebilir bir engel olarak görünürse.</li>
+      </ol>
+      <p class="note">Astra'nın notu: Selected → Bib → Yıldız zorunlu bir sıra değil. Zeferan'ın fiyat seviyesiyle Bib hedef olmamalı; Selected'tan sonra doğrudan yıldız konuşulur, ama yalnızca bağımsız tadım sonuçları destekliyorsa.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">6 · Michelin'in radarına girmek</span><h2>Başvuru yok, bulunabilirlik var</h2><p>Michelin restoran seçkisine başvuru yapılmaz, ücret ödenmez, ziyaret garanti edilmez. Müfettişin restoranı bulmasını ve doğru değerlendirmesini kolaylaştıran yollar:</p></div>
+  <div class="steps">
+    <div class="step"><div class="n">YOL 1</div><h3>Bulunabilirlik</h3><p>Güncel fiyatlı menü, tek mutfak etiketi, doğru saatler, kolay dış rezervasyon (Google, OpenTable zaten var). Müfettiş sıradan bir misafir gibi rezervasyon yapar.</p></div>
+    <div class="step"><div class="n">YOL 2</div><h3>Editoryal hikâye</h3><p>Azerbaycan bölgesel mutfağı, şefin TV geçmişi, üretici ilişkileri. Gastronomi basınına somut, doğrulanabilir hikâye; ücretli içerik ayrı tutulur.</p></div>
+    <div class="step"><div class="n">YOL 3</div><h3>Bağımsız tanınmalar</h3><p>Gault&Millau Türkiye ve yerel gastronomi ödülleri görünürlük sağlar; Michelin'e geçiş bileti değildir. Cappadocia'nın Gourmand Table unvanı İstanbul'da da anlatılabilir.</p></div>
+    <div class="step"><div class="n">YOL 4</div><h3>2027 ulusal seçki</h3><p>Rehber 2027'de tüm Türkiye'yi kapsıyor: iletişim fırsatı. İstanbul zaten kapsamda; öncelik sağlamaz, dikkat penceresi açar.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="north"><span class="eyebrow">Yatırımcıya tek cümle</span><p>"Zeferan'ı, İstanbul'da Azerbaycan mutfağı için özellikle rezervasyon yapılan ve her vardiyada aynı üstün lezzeti sunan restoran yapmak."</p><p class="sub">İlk 90 günün ölçüsü: beş imza tabakta sapma sayısı, menüde kimlik dışı kalem oranı, otel dışı misafir oranı ve öğle servisi şikâyeti düşsün; TripAdvisor kategorisi tek mutfağa insin.</p></div>
+  <div class="caveats"><h3>Doğrulama notları (Astra'nın uyarıları)</h3>
+    <ul>
+      <li>Alkol, Michelin'in beş kriteri arasında yok. Tatbak (İstanbul) alkolsüz Bib Gourmand; Suudi Arabistan rehberinde 33 alkolsüz restoran Selected/Bib aldı, yıldızlar 2027'de. Türkiye'de alkolsüz yıldızlı örnek henüz yok; Selected ve Bib için alkolsüzlük kanıtlanmış biçimde engel değil.</li>
+      <li>Fiyatlar (Şah Pilav €75 vb.) web sitesinden; porsiyon bilgisi olmadan fiyat/değer hükmü kurulamaz.</li>
+      <li>Yemekleri tatmadan yıldız potansiyeli değerlendirilemez; bu rapor ürün ve iletişim karşılaştırmasıdır. Otelin Michelin Anahtarı, restoranın değerlendirmesinden bağımsızdır.</li>
+      <li>TheFork'un Türkiye kapsamı ve Michelin'in Türkiye için restoran bilgi iletme kanalı teyit gerektirir; seçilmeyi sağlayan ücretli veya garantili bir başvuru yoktur.</li>
+    </ul>
+  </div>
+</section>
+
+<footer><b style="color:var(--ink2)">Kaynaklar · Zeferan Sultanahmet</b>
+  <ul>
+    <li><a href="https://www.sultanahmet.zeferan.com.tr/en">sultanahmet.zeferan.com.tr</a> · <a href="https://www.zeferan.com.tr/">zeferan.com.tr</a></li>
+    <li><a href="https://www.tripadvisor.com/Restaurant_Review-g293974-d12243231-Reviews-Zeferan_Restaurant-Istanbul.html">TripAdvisor · Zeferan Restaurant Istanbul</a></li>
+    <li><a href="https://guide.michelin.com/tr/tr/article/michelin-guide-ceremony/michelin-rehberi-turkiye-2026-restoran-seckisini-acikliyor-ve-ulkenin-gastronomi-haritasinda-onemli-bir-genislemeye-imza-atiyor">Michelin Rehberi Türkiye 2026 seçkisi</a></li>
+    <li><a href="https://guide.michelin.com/us/en/article/features/what-is-a-michelin-star">Michelin · yıldız kriterleri</a></li>
+    <li><a href="https://guide.michelin.com/en/istanbul-province/istanbul/restaurant/tugra">Michelin · Tuğra</a> · <a href="https://guide.michelin.com/en/istanbul-province/istanbul/restaurant/deraliye">Michelin · Deraliye</a></li>
+    <li><a href="https://guide.michelin.com/en/tr/istanbul-province/istanbul/restaurants/bib-gourmand">Michelin · İstanbul Bib Gourmand listesi</a> · <a href="https://guide.michelin.com/us/en/istanbul-province/istanbul/restaurant/tatbak">Tatbak</a></li>
+    <li><a href="https://guide.michelin.com/sa/en/article/michelin-guide-ceremony/saudi-arabia-inaugural-michelin-guide-restaurant-selection">Michelin Guide Suudi Arabistan · ilk seçki</a></li>
+    <li>GPT Astra (Codex) · çok turlu danışma, 26 Eylül 2026</li>
+  </ul>
+</footer>
+</div><!-- /tab-zeferan-sultanahmet -->
+
+<!-- ============================================================ -->
+<!-- SEKME 4 · ZEFERAN CAPPADOCIA                                    -->
+<!-- ============================================================ -->
+<div id="tab-zeferan-cappadocia" role="tabpanel" aria-labelledby="btn-zeferan-cappadocia" hidden>
+
+<header class="hero">
+  <div class="eyebrow"><span>AJWA Cappadocia · ayrı bina, cam kubbe</span><span>Azerbaycan mutfağı · alkolsüz</span><span>Executive Chef Ramil Bağırov</span></div>
+  <h1>Zeferan Cappadocia: Kapadokya'nın yeni seçkisine girmek</h1>
+  <p class="lede">Kapadokya 2026'da Michelin Rehberi'ne ilk kez girdi: bir yıldız, beş Bib Gourmand, on üç Selected. Mustafapaşa'nın 1 numaralı restoranı olan Zeferan listede yok. Gerçekçi ilk hedef <b>Michelin Selected</b>. Ayrı binası, ritüelleri ve üç yıllık Gourmand Table unvanıyla Zeferan Cappadocia, Sultanahmet'ten daha hazır; eksik olan Kapadokya toprağı ve kimlik netliği.</p>
+  <div class="kpis">
+    <div class="kpi goal"><b>Selected</b><small>Gerçekçi ilk hedef · Kapadokya 2026'da 13 restoran</small></div>
+    <div class="kpi"><b>5,0</b><small>TripAdvisor · Mustafapaşa'da 16 restoran içinde #1</small></div>
+    <div class="kpi"><b>1.058</b><small>yorum · Travelers' Choice 2026 · $$$$</small></div>
+    <div class="kpi"><b>3 yıl</b><small>GM Gourmand Table 2024 · 2025 · 2026</small></div>
+    <div class="kpi"><b>47</b><small>yemek · safran imzası · 07:00–23:00</small></div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">1 · Kapadokya seçkisi neye benziyor?</span><h2>Bir yıldız, beş Bib, on üç Selected</h2><p>Michelin'in Kapadokya duyurusu neyi övdüğünü açık söylüyor: <b>tandır, fermente ürünler, çorbalar, mezeler ve testi</b>. Yani bölge terroir'i. Seçkideki otel restoranları (Seki, Nahita, Lil'a, Moniq) bunu kendi mutfaklarına katmış. Zeferan'ın Azerbaycan kimliği ayrıştırıcı; Kapadokya ürünüyle buluşması gerekiyor.</p></div>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th></th><th class="hl">Zeferan Cappadocia</th><th>Revithia (Kayakapı)</th><th>Seki (Argos)</th><th>Lil'a (Museum Hotel)</th></tr></thead>
+      <tbody>
+        <tr><td>Michelin 2026</td><td class="hl">Seçkide yok</td><td>1 Yıldız</td><td>Selected</td><td>Selected</td></tr>
+        <tr><td>Konum</td><td class="hl">Mustafapaşa, otel arazisinde ayrı bina</td><td>Ürgüp, otel içi</td><td>Uçhisar, otel içi</td><td>Uçhisar, otel içi</td></tr>
+        <tr><td>Mutfak</td><td class="hl">Azerbaycan; TA etiketi "Turkish, Grill"</td><td>Bölgesel Kapadokya, unutulmuş tarifler, tadım menüsü</td><td>Uluslararası + bölgesel, şarap mahzeni</td><td>Farm-to-table, kendi arazisi</td></tr>
+        <tr><td>Şef</td><td class="hl">Ramil Bağırov (web'de biyografi yok)</td><td>Duran Özdemir, menünün yüzü</td><td>—</td><td>—</td></tr>
+        <tr><td>Terroir</td><td class="hl">Menüde Kapadokya ürünü yok</td><td>Sütte pişen kuzu, fermente tahıl, sütlü tarhana</td><td>Kendi bağının şarabı</td><td>Kendi çiftliği</td></tr>
+        <tr><td>Ritüel</td><td class="hl">Hamur kubbesi, sac, semaver</td><td>Tadım menüsü akışı</td><td>Mahzen turu</td><td>Teras, balon</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="crit">
+    <div class="c"><b>1 · Malzeme</b><span>Safranın kökeni? Kuzu, üzüm, pekmez kimden?</span></div>
+    <div class="c"><b>2 · Teknik</b><span>Sac ve kubbe töreni pişirmeyi uzatıyor mu, soğutuyor mu?</span></div>
+    <div class="c"><b>3 · Uyum</b><span>47 tabakta denge; vişneli bonfile ve portakallı enginar nereye ait?</span></div>
+    <div class="c"><b>4 · Şefin kişiliği</b><span>Ramil'in cümlesi menüden okunuyor mu?</span></div>
+    <div class="c"><b>5 · Tutarlılık</b><span>Kahvaltıdan akşama 16 saat, aynı ekip, aynı tabak.</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">2 · Bugün neredeyiz?</span><h2>Güçlü yanlar ve açıklar</h2><p>Kaynak: cappadocia.zeferan.com.tr, TripAdvisor yorumları, Michelin Kapadokya duyurusu ve seçki listeleri, Astra'nın sektör bilgisi.</p></div>
+  <div class="cols">
+    <div class="panel"><h3>Elimizdeki güç</h3>
+      <ul>
+        <li><b>Ayrı bina, cam kubbe:</b> "otel kahvaltı salonu" algısı burada yok. Restoran kendi adresi olan bir yer.</li>
+        <li><b>Ritüeller:</b> hamur kubbesi töreni, sac servisi, antika servis parçaları, bakır semaverle çay. Michelin puanlamaz ama akşamı hatırlanır kılar.</li>
+        <li><b>Tanınma var:</b> GM Gourmand Table üç yıl üst üste, Travelers' Choice, Mustafapaşa #1. Web sitesinde bunlar yazıyor.</li>
+        <li><b>Yönetim yanıtı:</b> F&B Müdürü Ertuğrul Sevgi her yoruma imzalı, yemeğe atıf yapan yanıt veriyor.</li>
+        <li><b>Değer 4,9:</b> Sultanahmet'in tersine fiyat şikâyeti yok. Düşbere, Şah Pilav, Lavangi ismen övülüyor.</li>
+      </ul>
+    </div>
+    <div class="panel"><h3>Michelin gözüyle açıklar</h3>
+      <ul>
+        <li><b>TripAdvisor kimliği yanlış:</b> kategori "Turkish, Grill", Azerbaycan geçmiyor; açıklama metni "Ajwa Hotel Sultanahmet"ten kopyalanmış. Müfettiş ilk bunu okur.</li>
+        <li><b>47 yemek ve kimlik dışı tabaklar:</b> vişneli bonfile, portakallı enginar, "Türk kahvaltısı". Geniş menü tutarlılığı zorlar; kriter 4 ve 5 riski.</li>
+        <li><b>Kapadokya toprağı menüde yok:</b> Michelin bölgede tandır, fermente ürün ve testiyi övdü. Zeferan'da Azerbaycan var, Kapadokya yok.</li>
+        <li><b>Şef görünmez:</b> Ramil Bağırov'un biyografisi, yaklaşımı, geçmişi web'de yok. Yorumlarda teşekkür "Şef Mehmet"e gidiyor.</li>
+        <li><b>Kaynak ve fiyat şeffaflığı:</b> "her malzeme özenle seçilir" ama tek üretici adı yok; menüde fiyat yok; alkol politikası yazılmıyor; web'de yalnızca dört yemek adı.</li>
+      </ul>
+    </div>
+  </div>
+  <figure style="margin-top:12px">
+    <svg viewBox="0 0 860 160" role="img" aria-label="TripAdvisor alt puanları 4.0 ile 5.0 arasında nokta grafiği">
+      <g class="svgtxt" font-size="12.5">
+        <line x1="180" y1="125" x2="820" y2="125" stroke="var(--line)"/>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="middle"><text x="180" y="143">4,0</text><text x="308" y="143">4,2</text><text x="436" y="143">4,4</text><text x="564" y="143">4,6</text><text x="692" y="143">4,8</text><text x="820" y="143">5,0</text></g>
+        <g stroke="var(--line)" stroke-dasharray="2 4"><line x1="308" y1="20" x2="308" y2="125"/><line x1="436" y1="20" x2="436" y2="125"/><line x1="564" y1="20" x2="564" y2="125"/><line x1="692" y1="20" x2="692" y2="125"/></g>
+        <g fill="var(--ink2)" text-anchor="end"><text x="160" y="35">Servis</text><text x="160" y="59">Atmosfer</text><text x="160" y="83" font-weight="700" fill="var(--ink)">Yemek</text><text x="160" y="107">Fiyat / değer</text></g>
+        <g stroke="var(--line)"><line x1="180" y1="31" x2="820" y2="31"/><line x1="180" y1="55" x2="820" y2="55"/><line x1="180" y1="79" x2="756" y2="79"/><line x1="180" y1="103" x2="756" y2="103"/></g>
+        <g fill="var(--lapis)" stroke="var(--surface)" stroke-width="2"><circle cx="820" cy="31" r="7"/><circle cx="820" cy="55" r="7"/><circle cx="756" cy="103" r="7"/></g>
+        <circle cx="756" cy="79" r="7" fill="var(--pomeg)" stroke="var(--surface)" stroke-width="2"/>
+        <g fill="var(--ink)" font-size="12" font-weight="600"><text x="834" y="35">5,0</text><text x="834" y="59">5,0</text><text x="770" y="83">4,9</text><text x="770" y="107">4,9</text></g>
+      </g>
+    </svg>
+    <figcaption>TripAdvisor alt puanları, 1.058 yorum. Servis ve atmosfer tam puan; Michelin'in tek ölçtüğü satır <b>yemek</b>. Fark küçük ama yönü önemli: misafir deneyimi tabağın önüne geçmiş olabilir.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">3 · Neyi önce yapalım?</span><h2>Etki × kolaylık matrisi</h2><p>Sultanahmet'ten farklı olan işlere odaklandık: menü sadeleştirme, Kapadokya ürünü, ritüel süresi, semaver eşleştirmesi. Puanlar Astra ile ortak yönetim tahminidir.</p></div>
+  <figure>
+    <svg viewBox="0 0 860 460" role="img" aria-label="Etki ve kolaylık matrisi, 13 aksiyon">
+      <g class="svgtxt" font-size="12.5">
+        <rect x="455" y="40" width="365" height="180" fill="var(--lapis-soft)" opacity=".55" rx="4"/>
+        <text x="810" y="60" text-anchor="end" fill="var(--lapis)" font-size="11" font-weight="700" letter-spacing="1.5">ÖNCE BURADAN BAŞLA</text>
+        <g stroke="var(--line)" stroke-dasharray="2 4"><line x1="90" y1="130" x2="820" y2="130"/><line x1="90" y1="220" x2="820" y2="220"/><line x1="90" y1="310" x2="820" y2="310"/><line x1="272" y1="40" x2="272" y2="400"/><line x1="455" y1="40" x2="455" y2="400"/><line x1="637" y1="40" x2="637" y2="400"/></g>
+        <line x1="90" y1="400" x2="820" y2="400" stroke="var(--line)"/><line x1="90" y1="40" x2="90" y2="400" stroke="var(--line)"/>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="middle"><text x="90" y="420">zor</text><text x="455" y="420">kolaylık</text><text x="820" y="420">kolay</text></g>
+        <g fill="var(--muted)" font-size="11.5" text-anchor="end"><text x="80" y="404">düşük</text><text x="80" y="222">etki</text><text x="80" y="46">yüksek</text></g>
+        <!-- 0–3 ay -->
+        <g fill="var(--lapis)" stroke="var(--surface)" stroke-width="2">
+          <circle cx="637" cy="40" r="8"/>   <!-- tabak + tören tutarlılık 5x4 -->
+          <circle cx="455" cy="40" r="8"/>   <!-- 47 yemeği sadeleştir 5x3 -->
+          <circle cx="820" cy="130" r="8"/>  <!-- dijital kimlik 4x5 -->
+          <circle cx="455" cy="130" r="8"/>  <!-- izlenebilir kaynak 4x3 -->
+          <circle cx="637" cy="130" r="8"/>  <!-- ritüelleri kısalt 4x4 -->
+          <circle cx="482" cy="156" r="8"/>  <!-- semaver eşleştirme 4x3 -->
+          <circle cx="820" cy="220" r="8"/>  <!-- Seki'de benchmark 3x5 -->
+        </g>
+        <!-- 3–12 ay -->
+        <g fill="var(--brass)" stroke="var(--surface)" stroke-width="2">
+          <circle cx="428" cy="66" r="8"/>   <!-- Azerbaycan × Kapadokya menü 5x3 -->
+          <circle cx="428" cy="108" r="8"/>  <!-- bağ/üretici satın alma 4x3 -->
+          <circle cx="455" cy="220" r="8"/>  <!-- Ramil'in sofrası 3x3 -->
+          <circle cx="272" cy="40" r="8"/>   <!-- bağımsız denetim 5x2 -->
+          <circle cx="272" cy="220" r="8"/>  <!-- Yeşil Yıldız ölçüm 3x2 -->
+        </g>
+        <!-- 12+ ay -->
+        <g fill="var(--pomeg)" stroke="var(--surface)" stroke-width="2">
+          <circle cx="90" cy="220" r="8"/>   <!-- depolama/hazırlık CAPEX 3x1 -->
+        </g>
+        <g fill="var(--ink)" font-size="12" font-weight="600">
+          <text x="649" y="30">Tabak + tören tutarlılık denetimi</text>
+          <text x="467" y="30">47 yemeği sadeleştir</text>
+          <text x="808" y="120" text-anchor="end">TA kategorisi + web kimliği</text>
+          <text x="443" y="120" text-anchor="end">Üç ürün için izlenebilir kaynak</text>
+          <text x="649" y="148">Ritüelleri kısa ve anlamlı kıl</text>
+          <text x="494" y="178">Semaveri eşleştirmeye bağla</text>
+          <text x="808" y="210" text-anchor="end">Seki'de benchmark yemeği</text>
+          <text x="416" y="70" text-anchor="end">Azerbaycan × Kapadokya menüsü</text>
+          <text x="416" y="98" text-anchor="end">Bağ / üretici satın alma ilişkisi</text>
+          <text x="467" y="240">Ramil'in sofrası (sınırlı)</text>
+          <text x="284" y="30">Bağımsız gastronomi denetimi</text>
+          <text x="284" y="240">Yeşil Yıldız için ölçüm</text>
+          <text x="102" y="210">Depolama / hazırlık / kubbe servis CAPEX</text>
+        </g>
+      </g>
+    </svg>
+    <div class="legend"><span><i style="background:var(--lapis)"></i>0–3 ay</span><span><i style="background:var(--brass)"></i>3–12 ay</span><span><i style="background:var(--pomeg)"></i>12+ ay</span></div>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">4 · 0–3 ay</span><h2>Ufak aksiyon, büyük fark</h2><p>Hepsi mutfak ve iletişim içinde; CAPEX yok. Zeferan Cappadocia'nın avantajı mekân; riski menü genişliği.</p></div>
+  <div class="actions">
+    <div class="act"><div class="rank">1</div><div><h3>Tabak ve tören tutarlılığını birlikte denetle</h3><p>Lavangi, Şah Pilav, düşbere, Piti ve sac servisini beş farklı gün ve vardiyada aynı formla değerlendir. Törenin yemeği soğutması veya pişirmeyi uzatması özellikle izlensin: kubbe kırıldığında pilav hâlâ sıcak mı? Sapma görülen tabağın reçetesi ve zamanlaması yazılır.</p><p class="why">Neden: Michelin'in 5. kriteri. Ritüel güçlü bir kimlik aracı, ama tabağın önüne geçerse 2. ve 3. kriteri düşürür.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">2</div><div><h3>47 yemeği performansına göre sadeleştir</h3><p>Satış, fire, hazırlık yükü ve tadım sonucuyla karar ver; 8–10 tabaklık Azerbaycan çekirdeğini belirginleştir. Vişneli bonfile, portakallı enginar gibi kimlik dışı tabaklar ya çıkar ya ayrı bölüme iner. Yalnızca menü tasarımını değiştirmek yetmez; mutfak akışı da sadeleşir.</p><p class="why">Neden: geniş menü tek başına sorun kanıtı değil, ama tutarlılığın en büyük düşmanı. Müfettiş tek mutfak okumalı.</p></div><div class="score"><small>etki × kolaylık</small><b>5 × 3</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+    <div class="act"><div class="rank">3</div><div><h3>TripAdvisor kategorisini ve web kimliğini düzelt</h3><p>Kategori "Azerbaijani"; açıklama metni Cappadocia'ya özgü (bugün Sultanahmet'ten kopya); Ramil Bağırov'un biyografisi ve yaklaşımı; fiyatlı tam menü; Gourmand Table 2024–2026 unvanı; dış misafir için rezervasyon, ulaşım ve ayrı bina bilgisi; "alkol servisi yoktur, çay ve eşleştirme menümüz vardır" cümlesi.</p><p class="why">Neden: yarım günlük iş. Müfettiş rezervasyondan önce TripAdvisor ve web'i okur; bugün ikisi de yanlış hikâye anlatıyor.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 5</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">4</div><div><h3>Ritüelleri kısa ve anlamlı kıl</h3><p>Hamur kubbesi, sac ve semaver için süre, servis sırası ve 30 saniyelik anlatım belirle. Antika servis parçalarının kökeni yalnızca doğrulanabiliyorsa anlatılır. Tören, yemeğe hizmet eder; yemek törene değil.</p><p class="why">Neden: Michelin'in Deraliye notu "zaman zaman gösteri dokunuşuyla" diyor; gösteri tolere edilir, tabağı soğutan gösteri edilmez.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 4</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">5</div><div><h3>Üç ürün için izlenebilir kaynak</h3><p>Safranın gerçek kökeni (İran? Azerbaycan? Safranbolu?), kuzunun tedarikçisi ve bir Kapadokya ürünü (Ürgüp üzümü, pekmez, kabak çekirdeği) belgelenir; menüde ve servis anlatımında adıyla geçer. Yerel olmayan ürün "Kapadokyalı" diye sunulmaz.</p><p class="why">Neden: Michelin'in 1. kriteri ve Kapadokya duyurusunun terroir vurgusu. "Özenle seçilir" cümlesi kanıt değil.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 3</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+    <div class="act"><div class="rank">6</div><div><h3>Semaveri eşleştirme programına bağla, Seki'de yemek ye</h3><p>Çay, koruk ve dengeli üzüm içeceklerinden (şıra alkol içeriği doğrulanarak) üç eşleşme; demleme, sıcaklık ve tatlılık standardı. Aynı ay mutfak ve servis liderleri Seki veya Lil'a'da normal rezervasyonla yemek yesin: hesap, tutarlılık, kimlik okunabilirliği aynı formda.</p><p class="why">Neden: Argos şarap mahzeniyle fark yaratıyor; Zeferan'ın cevabı alkolsüz terroir. Çıtayı tahmin etmek yerine görmek bir akşamlık iş.</p></div><div class="score"><small>etki × kolaylık</small><b>4 × 3</b><div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">5 · Sonraki adımlar</span><h2>Orta vade ve yapısal yatırım</h2></div>
+  <div class="phases">
+    <div class="phase mid"><span class="tag">3–12 ay · Azerbaycan × Kapadokya</span>
+      <ol>
+        <li><b>5–7 servislik menü: Azerbaycan tekniği, Kapadokya ürünü.</b> Ar-Ge adayları: koruk eşlikli Lavangi yorumu, bağ yaprağında kuzu, pekmez–kabak çekirdeği tatlısı. Testi kebabı zorunlu değil; geleneksel tarif oldukları da iddia edilmez.</li>
+        <li><b>Bağ ve üretici ziyaretlerini satın almaya bağla.</b> Otelin 90 dönümünden ve Mustafapaşa üreticilerinden gerçek tedarik; mevsimsel değişim ürün bulunabilirliğine göre. Museum Hotel'in farm-to-table cevabı.</li>
+        <li><b>Ramil'in sofrası.</b> Sınırlı katılımlı, ayda iki akşam; mevcut servis kapasitesiyle. Şefi menünün yüzü yapar.</li>
+        <li><b>Bağımsız gastronomi denetimi.</b> Farklı mevsimlerde anonim değerlendirme; menü bütünlüğü ve tutarlılık sınanır.</li>
+        <li><b>Yeşil Yıldız için ölçüm.</b> Porsiyon başına gıda atığı, yerel tedarik oranı, su/enerji. Babayan Evi Kapadokya'da Yeşil Yıldız aldı; ölçülmeyen sürdürülebilirlik anlatı olarak kalır.</li>
+        <li><b>Kahvaltı ile akşam kimliğini ayır.</b> "Türk kahvaltısı" sabahın işi; akşam menüsünde yer almaz. 16 saatlik servis günü için vardiya ve hazırlık planı.</li>
+      </ol>
+    </div>
+    <div class="phase long"><span class="tag">12+ ay · kanıta dayalı CAPEX</span>
+      <ol>
+        <li><b>Depolama, hazırlık ve cam kubbeli salonun servis koşulları.</b> Yalnızca denetimde ölçülen soruna: sıcaklık, servis mesafesi, hazırlık alanı.</li>
+        <li><b>Açık mutfak veya şef tezgâhı.</b> Ramil'in sofrası dolduysa; gösterişli açık mutfak otomatik öncelik değil.</li>
+        <li><b>Arazi içi üretim altyapısı.</b> Hasat programı gerçek tedarike dönüştüyse sera, bağ bakımı, depolama.</li>
+      </ol>
+      <p class="note">Astra'nın notu: Kapadokya'nın yeni kapsanması keşfedilme fırsatıdır; yalnızca Revithia'nın yıldız alması bir kontenjan göstermez. Otelin Anahtar almamış olması restoranın değerlendirmesini etkilemez.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="eyebrow">6 · Michelin'in radarına girmek</span><h2>Başvuru yok, bulunabilirlik var</h2><p>Michelin restoran seçkisine başvuru yapılmaz, ücret ödenmez, ziyaret garanti edilmez. Kapadokya'da müfettişler artık düzenli geliyor; bulunması kolay ve kimliği net restoranlar değerlendirilir.</p></div>
+  <div class="steps">
+    <div class="step"><div class="n">YOL 1</div><h3>Bulunabilirlik</h3><p>Google, TripAdvisor ve web'de aynı isim, aynı mutfak etiketi, fiyatlı menü, doğru saatler, dış misafir rezervasyonu ve ayrı bina/ulaşım bilgisi.</p></div>
+    <div class="step"><div class="n">YOL 2</div><h3>Editoryal hikâye</h3><p>"Azerbaycan mutfağı Kapadokya toprağıyla buluşuyor": üretici adları, safranın yolculuğu, Ramil'in yaklaşımı. Gastronomi basınına somut ve doğrulanabilir hikâye.</p></div>
+    <div class="step"><div class="n">YOL 3</div><h3>Bağımsız tanınmalar</h3><p>Gourmand Table unvanı doğru adıyla kullanılır; Gault&Millau Türkiye ve yerel ödüller görünürlük sağlar. Hiçbiri Michelin'e geçiş bileti değil.</p></div>
+    <div class="step"><div class="n">YOL 4</div><h3>Otel ile birlikte</h3><p>Otelin Anahtar yolu (Sinasos rotası, hasat programı) restoranla aynı hikâyeyi anlatır. Müfettişi araziye getiren şey restoran, otele Anahtar getirebilecek şey de o.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="north"><span class="eyebrow">Yatırımcıya tek cümle</span><p>"Zeferan'ı, Azerbaycan mutfak ustalığını Kapadokya'nın ürünleriyle buluşturan ve seyahatin başlı başına nedenlerinden biri olan restoran yapmak."</p><p class="sub">İlk 90 günün ölçüsü: menü kalem sayısı 47'den çekirdek + bölümlere insin; imza tabaklarda sapma ve tören süresi düşsün; adı geçen tedarikçi sayısı sıfırdan üçe çıksın; TripAdvisor kategorisi "Azerbaijani" olsun.</p></div>
+  <div class="caveats"><h3>Doğrulama notları (Astra'nın uyarıları)</h3>
+    <ul>
+      <li>Michelin'in Zeferan'ı değerlendirip değerlendirmediği bilinmiyor; "seçkide yok" bir sonuçtur, gerekçe değil. Buradaki açıklar beş kritere göre ürün ve iletişim karşılaştırmasıdır.</li>
+      <li>Alkol, beş kriter arasında yok. Tatbak (İstanbul) alkolsüz Bib Gourmand; Suudi Arabistan rehberinde 33 alkolsüz restoran Selected/Bib aldı. Şıra ve üzüm içeceklerinin alkol içeriği servis öncesinde doğrulanmalı.</li>
+      <li>Argos ve Museum Hotel restoranlarının Selected gerekçeleri Michelin'in açıkladığı karar metinleri değil, tanıtım yazılarından çıkarımdır.</li>
+      <li>Ar-Ge tabak önerileri (koruklu Lavangi, bağ yaprağında kuzu) geleneksel tarif değildir; şefin yorumu olarak sunulmalıdır. Yemekleri tatmadan yıldız potansiyeli değerlendirilemez.</li>
+    </ul>
+  </div>
+</section>
+
+<footer><b style="color:var(--ink2)">Kaynaklar · Zeferan Cappadocia</b>
+  <ul>
+    <li><a href="https://www.cappadocia.zeferan.com.tr/en">cappadocia.zeferan.com.tr</a> · <a href="https://www.zeferan.com.tr/">zeferan.com.tr</a></li>
+    <li><a href="https://www.tripadvisor.com/Restaurant_Review-g635898-d20164035-Reviews-Zeferan_Cappadocia-Mustafapasa_Urgup_Cappadocia.html">TripAdvisor · Zeferan Cappadocia</a></li>
+    <li><a href="https://guide.michelin.com/tr/tr/article/michelin-guide-ceremony/michelin-rehberi-turkiye-2026-restoran-seckisini-acikliyor-ve-ulkenin-gastronomi-haritasinda-onemli-bir-genislemeye-imza-atiyor">Michelin Rehberi Türkiye 2026 seçkisi</a></li>
+    <li><a href="https://guide.michelin.com/tr/en/article/news-and-views/cappadocia-joins-the-michelin-guide-in-turkiye-video">Michelin · Kapadokya rehbere katılıyor</a></li>
+    <li><a href="https://www.oggusto.com/gastronomi/turkiye/kapadokyanin-michelin-yildizli-restoranlari">OGGUSTO · Kapadokya Michelin restoranları (tam liste)</a></li>
+    <li><a href="https://guide.michelin.com/en/article/travel/turkiye-cappadocia-hotels-with-standout-restaurants">Michelin · Kapadokya otelleri ve restoranları</a></li>
+    <li><a href="https://guide.michelin.com/us/en/article/features/what-is-a-michelin-star">Michelin · yıldız kriterleri</a></li>
+    <li><a href="https://guide.michelin.com/sa/en/article/michelin-guide-ceremony/saudi-arabia-inaugural-michelin-guide-restaurant-selection">Michelin Guide Suudi Arabistan · ilk seçki</a></li>
+    <li>GPT Astra (Codex) · çok turlu danışma, 26 Eylül 2026</li>
+  </ul>
+</footer>
+</div><!-- /tab-zeferan-cappadocia -->
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  var names = ['sultanahmet','cappadocia','zeferan-sultanahmet','zeferan-cappadocia'];
+  var btns = document.querySelectorAll('.tab-btn');
+  var panels = {};
+  names.forEach(function(n){ panels[n] = document.getElementById('tab-' + n); });
+  function show(name, push){
+    if(!panels[name]) name = 'sultanahmet';
+    names.forEach(function(k){ panels[k].hidden = (k !== name); });
+    btns.forEach(function(b){ b.setAttribute('aria-selected', b.dataset.tab === name ? 'true' : 'false'); });
+    if(push){ try { history.replaceState(null, '', '#' + name); } catch(e){} }
+    try { localStorage.setItem('ajwa-tab', name); } catch(e){}
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.tab, true); window.scrollTo({top:0, behavior:'smooth'}); }); });
+  var initial = (location.hash || '').replace('#','');
+  if(!panels[initial]){ try { initial = localStorage.getItem('ajwa-tab') || 'sultanahmet'; } catch(e){ initial = 'sultanahmet'; } }
+  show(initial, false);
+  window.addEventListener('hashchange', function(){ var h = (location.hash||'').replace('#',''); if(panels[h]) show(h, false); });
+})();
+</script>
